@@ -45,6 +45,7 @@ export default function Timeline() {
   return (
     <section
       id="how-it-works"
+      aria-label="The Strategi Methodology: six phases to AI Presence"
       className="bg-[#050505] pt-24 md:pt-40 pb-20 border-t border-white/10"
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-16 md:mb-24">

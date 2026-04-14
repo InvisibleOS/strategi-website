@@ -77,7 +77,7 @@ function AIDashboardMockup() {
 
 export default function Showcase() {
   return (
-    <section id="showcase" className="relative overflow-hidden py-0 bg-[#050505]">
+    <section id="showcase" aria-label="AI Presence results demonstration" className="relative overflow-hidden py-0 bg-[#050505]">
       <ContainerScroll
         titleComponent={
           <div className="space-y-6 mb-10">

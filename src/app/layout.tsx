@@ -4,7 +4,6 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,21 +16,35 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Strategi — AI Presence for Established Businesses",
+  title: {
+    default: "Strategi — AI Presence for Established Businesses",
+    template: "%s | Strategi",
+  },
   description:
-    "Strategi is a strategic advisory for the AI discovery era. We make the right businesses get recommended by artificial intelligence. AI does not rank. AI selects.",
+    "Strategi is a strategic advisory that builds AI Presence for established businesses. We make the right companies get recommended when ChatGPT, Gemini, Perplexity, and Claude answer the questions that matter. SEO gets you on the list. Strategi gets you in the answer.",
   keywords: [
     "AI Presence",
+    "AI Presence advisory",
     "AI recommendations",
     "AI visibility",
+    "AI visibility audit",
     "AI discovery",
     "Strategi",
-    "AI advisory",
     "machine comprehension",
     "entity optimization",
-    "AI Visibility Audit",
+    "AI readability",
+    "ChatGPT recommendations",
+    "Perplexity recommendations",
+    "Gemini recommendations",
+    "AI search optimization",
+    "generative engine optimization",
+    "GEO",
+    "AI citation",
+    "structured data for AI",
+    "machine-readable website",
+    "AI entity positioning",
   ],
-  authors: [{ name: "Strategi" }],
+  authors: [{ name: "Strategi", url: "https://strategi.is" }],
   creator: "Strategi",
   publisher: "Strategi",
   robots: {
@@ -40,11 +53,15 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   alternates: {
     canonical: "https://strategi.is",
   },
+  category: "Business Services",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -52,23 +69,29 @@ export const metadata: Metadata = {
     siteName: "Strategi",
     title: "Strategi — AI Presence for Established Businesses",
     description:
-      "We make the right businesses get recommended by artificial intelligence. SEO gets you on the list. Strategi gets you in the answer.",
+      "We make the right businesses get recommended by artificial intelligence. AI does not rank. AI selects. Strategi ensures your business is in the answer.",
     images: [
       {
         url: "https://strategi.is/strategi.png",
         width: 1200,
         height: 630,
         alt: "Strategi — AI Presence Advisory",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@HelloStrategi",
+    creator: "@HelloStrategi",
     title: "Strategi — AI Presence for Established Businesses",
     description:
-      "AI does not rank. AI selects. Strategi ensures your business is in the answer.",
-    creator: "@HelloStrategi",
+      "AI does not rank. AI selects. We build AI Presence for established businesses so they get recommended by ChatGPT, Gemini, Perplexity, and Claude.",
     images: ["https://strategi.is/strategi.png"],
+  },
+  other: {
+    "ai-content-declaration":
+      "This website describes AI Presence advisory services by Strategi. All content is original and authoritative.",
   },
 };
 
@@ -82,11 +105,74 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Link to llms.txt for AI crawlers */}
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM information" />
+      </head>
       <body className="min-h-full flex flex-col">
         <JsonLd />
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 relative">{children}</main>
         <Footer />
+
+        {/* Noscript fallback: essential content visible to crawlers with JS disabled */}
+        <noscript>
+          <div
+            style={{
+              position: "absolute",
+              left: "-9999px",
+              width: "1px",
+              height: "1px",
+              overflow: "hidden",
+            }}
+          >
+            <h1>Strategi — AI Presence for Established Businesses</h1>
+            <p>
+              Strategi is a strategic advisory for the AI discovery era. We exist
+              for one purpose: to make the right businesses get recommended by
+              artificial intelligence.
+            </p>
+            <p>
+              When someone asks ChatGPT, Gemini, Perplexity, or any AI system
+              for a recommendation in your category, you are either in the answer
+              or you are not. There is no page two. There is only inclusion or
+              exclusion. Strategi ensures inclusion.
+            </p>
+            <h2>Services</h2>
+            <ul>
+              <li>
+                AI Visibility Audit — Comprehensive diagnostic of how AI systems
+                perceive and recommend your business.
+              </li>
+              <li>
+                Positioning and Clarity Engineering — Defining how your business
+                should be understood by machines.
+              </li>
+              <li>
+                Website Structuring for AI Readability — Making your website
+                comprehensible to AI systems.
+              </li>
+              <li>
+                Content Systems for AI Inclusion — Building content that AI
+                systems cite and recommend.
+              </li>
+              <li>
+                Authority and Trust Layer Development — Building trust signals
+                that make AI confident in recommending you.
+              </li>
+              <li>
+                Continuous Optimization — Ongoing monitoring and adaptation as AI
+                models evolve.
+              </li>
+            </ul>
+            <h2>Methodology</h2>
+            <p>
+              Six phases: Diagnose, Define, Structure, Build, Reinforce, Monitor.
+            </p>
+            <h2>Contact</h2>
+            <p>Email: hello@strategi.is | Website: strategi.is</p>
+          </div>
+        </noscript>
       </body>
     </html>
   );

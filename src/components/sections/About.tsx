@@ -6,6 +6,7 @@ export default function About() {
   return (
     <section
       id="what-we-do"
+      aria-label="What Strategi does: we build AI Presence"
       className="bg-white/[0.01] border-y border-white/5 py-24 md:py-40"
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 text-center">

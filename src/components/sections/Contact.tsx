@@ -38,6 +38,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
+      aria-label="Contact Strategi: start with an AI Presence diagnostic"
       className="bg-[#d4620a] border-t border-white/10 pt-16 sm:pt-24 md:pt-40 pb-0 px-4 sm:px-6 md:px-12 overflow-hidden relative"
     >
       <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start md:items-end justify-between gap-10 sm:gap-16 relative z-10 mb-10 sm:mb-16 md:mb-24">

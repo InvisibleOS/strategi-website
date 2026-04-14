@@ -27,7 +27,7 @@ const targets = [
 
 export default function Tracks() {
   return (
-    <section id="who-its-for" className="bg-[#050505] pt-24 md:pt-40 pb-0">
+    <section id="who-its-for" aria-label="Who we work with: established businesses that deserve to be recommended" className="bg-[#050505] pt-24 md:pt-40 pb-0">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-16 md:mb-24 flex flex-col md:flex-row gap-12 justify-between items-start">
         <div className="md:w-1/3">
           <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-[#d4620a]">

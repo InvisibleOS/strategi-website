@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const faqs = [
   {
@@ -48,6 +48,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
+      aria-label="Frequently asked questions about AI Presence and Strategi"
       className="bg-[#050505] pt-24 md:pt-40 pb-24 border-t border-white/10"
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -70,7 +71,8 @@ export default function FAQ() {
           </a>
         </div>
 
-        <div className="border-t border-white/10">
+        {/* Accordion — answers always in DOM for crawlers, animated with CSS grid */}
+        <dl className="border-t border-white/10">
           {faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
 
@@ -79,82 +81,81 @@ export default function FAQ() {
                 key={idx}
                 className="border-b border-white/10 group bg-[#050505] hover:bg-white/[0.02] transition-colors duration-300"
               >
-                <button
-                  onClick={() => toggleOpen(idx)}
-                  className="w-full text-left py-8 md:py-10 flex items-start gap-6 md:gap-12 cursor-pointer focus:outline-none"
-                  aria-expanded={isOpen}
+                <dt>
+                  <button
+                    onClick={() => toggleOpen(idx)}
+                    className="w-full text-left py-8 md:py-10 flex items-start gap-6 md:gap-12 cursor-pointer focus:outline-none"
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${idx}`}
+                  >
+                    <div className="font-mono text-xs md:text-sm text-white/20 pt-1 w-8 shrink-0">
+                      {String(idx + 1).padStart(2, "0")}
+                    </div>
+
+                    <div className="flex-1 pr-8">
+                      <h3
+                        className={`text-xl md:text-3xl font-bold tracking-tight transition-colors duration-300 ${
+                          isOpen
+                            ? "text-white"
+                            : "text-white/60 group-hover:text-white"
+                        }`}
+                      >
+                        {faq.q}
+                      </h3>
+                    </div>
+
+                    <div className="relative w-4 h-4 shrink-0 mt-2">
+                      <motion.div
+                        animate={{
+                          rotate: isOpen ? 180 : 0,
+                          opacity: isOpen ? 0 : 1,
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute top-1/2 left-0 w-full h-[2px] bg-white/40 -translate-y-1/2"
+                      />
+                      <motion.div
+                        animate={{
+                          rotate: isOpen ? 180 : 0,
+                          opacity: isOpen ? 0 : 1,
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute top-0 left-1/2 w-[2px] h-full bg-white/40 -translate-x-1/2"
+                      />
+                      <motion.div
+                        animate={{
+                          opacity: isOpen ? 1 : 0,
+                          scale: isOpen ? 1 : 0.5,
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute top-1/2 left-0 w-full h-[2px] bg-[#d4620a] -translate-y-1/2"
+                      />
+                    </div>
+                  </button>
+                </dt>
+
+                {/* Answer always in DOM — uses CSS grid for smooth height animation */}
+                <dd
+                  id={`faq-answer-${idx}`}
+                  className="grid transition-[grid-template-rows] duration-400 ease-[cubic-bezier(0.25,0.4,0.25,1)]"
+                  style={{
+                    gridTemplateRows: isOpen ? "1fr" : "0fr",
+                  }}
                 >
-                  <div className="font-mono text-xs md:text-sm text-white/20 pt-1 w-8 shrink-0">
-                    {String(idx + 1).padStart(2, "0")}
+                  <div className="overflow-hidden">
+                    <div className="px-14 md:px-20 pb-8">
+                      <div className="flex items-start gap-4">
+                        <div className="w-1.5 h-1.5 bg-[#d4620a] mt-2 shrink-0" />
+                        <p className="text-base md:text-lg text-white/50 leading-relaxed font-light max-w-3xl">
+                          {faq.a}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-
-                  <div className="flex-1 pr-8">
-                    <h3
-                      className={`text-xl md:text-3xl font-bold tracking-tight transition-colors duration-300 ${
-                        isOpen
-                          ? "text-white"
-                          : "text-white/60 group-hover:text-white"
-                      }`}
-                    >
-                      {faq.q}
-                    </h3>
-
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{
-                            duration: 0.4,
-                            ease: [0.25, 0.4, 0.25, 1],
-                          }}
-                          className="overflow-hidden"
-                        >
-                          <div className="pt-6 pb-2">
-                            <div className="flex items-start gap-4">
-                              <div className="w-1.5 h-1.5 bg-[#d4620a] mt-2 shrink-0" />
-                              <p className="text-base md:text-lg text-white/50 leading-relaxed font-light max-w-3xl">
-                                {faq.a}
-                              </p>
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  <div className="relative w-4 h-4 shrink-0 mt-2">
-                    <motion.div
-                      animate={{
-                        rotate: isOpen ? 180 : 0,
-                        opacity: isOpen ? 0 : 1,
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute top-1/2 left-0 w-full h-[2px] bg-white/40 -translate-y-1/2"
-                    />
-                    <motion.div
-                      animate={{
-                        rotate: isOpen ? 180 : 0,
-                        opacity: isOpen ? 0 : 1,
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute top-0 left-1/2 w-[2px] h-full bg-white/40 -translate-x-1/2"
-                    />
-                    <motion.div
-                      animate={{
-                        opacity: isOpen ? 1 : 0,
-                        scale: isOpen ? 1 : 0.5,
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute top-1/2 left-0 w-full h-[2px] bg-[#d4620a] -translate-y-1/2"
-                    />
-                  </div>
-                </button>
+                </dd>
               </div>
             );
           })}
-        </div>
+        </dl>
       </div>
     </section>
   );

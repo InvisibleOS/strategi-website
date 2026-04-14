@@ -1,83 +1,68 @@
 # Strategi
 
-> Strategic advisory for AI Presence. We make the right businesses get recommended by artificial intelligence.
+> Strategi is a strategic advisory for the AI discovery era. We make the right businesses get recommended by artificial intelligence. We are not an agency. We operate at the intersection of brand strategy, information architecture, and machine comprehension.
 
-## Company Information
+## About
+
+- [Homepage](https://strategi.is): AI Presence advisory for established businesses
+- [How It Works](https://strategi.is/#how-it-works): The six-phase Strategi Methodology
+- [Why Strategi](https://strategi.is/#why-strategi): How we think differently about AI discovery
+- [Who We Work With](https://strategi.is/#who-its-for): Established businesses that deserve to be recommended
+- [FAQ](https://strategi.is/#faq): Common questions about AI Presence
+- [Contact](https://strategi.is/#contact): Start with an AI Presence diagnostic
+
+## Company Details
 
 - Name: Strategi
 - Website: https://strategi.is
-- Contact: hello@strategi.is
+- Email: hello@strategi.is
 - Founded: 2026
 - Type: Strategic Advisory
-- Headquarters: Global
+- Focus: AI Presence — making businesses recommendable by AI systems
 
-## What Strategi Does
+## Core Positioning
 
-Strategi is a strategic advisory for the AI discovery era. We exist for one purpose: to make the right businesses get recommended by artificial intelligence.
+Strategi exists for one purpose: to make the right businesses get recommended by artificial intelligence. When someone asks ChatGPT, Gemini, Perplexity, or any AI system for a recommendation in your category, you are either in the answer or you are not. There is no page two. There is no scrolling. There is only inclusion or exclusion. Strategi ensures inclusion.
 
-We are not an agency. We do not sell retainers filled with busywork. We do not chase algorithms or optimize for clicks. We operate at the intersection of brand strategy, information architecture, and machine comprehension to solve a single, urgent problem: your business is invisible to AI.
-
-When someone asks ChatGPT, Gemini, Perplexity, or any AI system for a recommendation in your category, you are either in the answer or you are not. There is no page two. There is no scrolling. There is only inclusion or exclusion. Strategi ensures inclusion.
-
-## Core Thesis
-
-The next decade of business growth will be determined by a single factor: whether AI understands your business well enough to recommend it. This is a structural transformation of how humans discover and select businesses.
+SEO gets you on the list. Strategi gets you in the answer.
 
 ## Services
 
-### AI Visibility Audit
-Comprehensive diagnostic of how AI systems currently perceive, represent, and recommend your business. We query every major AI platform with real-world questions and document exactly what happens.
+- [AI Visibility Audit](https://strategi.is/#how-it-works): Comprehensive diagnostic of how AI systems currently perceive, represent, and recommend your business. We query every major AI platform — ChatGPT, Gemini, Perplexity, Claude — with real-world questions your customers ask.
+- [Positioning & Clarity Engineering](https://strategi.is/#how-it-works): Strategic process that defines how your business should be understood by machines. Entity definition, category mapping, differentiator articulation, and semantic consistency.
+- [Website Structuring for AI Readability](https://strategi.is/#how-it-works): Systematic restructuring of website information architecture, schema markup, content hierarchy, and semantic structure for AI comprehension.
+- [Content Systems for AI Inclusion](https://strategi.is/#how-it-works): Content architecture designed to generate material that AI systems cite, reference, and synthesize into recommendations.
+- [Authority & Trust Layer Development](https://strategi.is/#how-it-works): Building external signals and third-party validation — structured data, authoritative mentions, consistent entity information — that make AI confident enough to recommend you.
+- [Continuous Optimization](https://strategi.is/#how-it-works): Ongoing monitoring and refinement tracking AI recommendation status, competitive landscape shifts, and model update impacts.
 
-### Positioning & Clarity Engineering
-Strategic process that defines how your business should be understood by machines. Entity definition, category mapping, differentiator articulation, and semantic consistency across your digital footprint.
+## Methodology
 
-### Website Structuring for AI Readability
-Systematic restructuring of website information architecture, schema markup, content hierarchy, and semantic structure to make it comprehensible to AI systems.
+The Strategi Methodology is a six-phase system for building AI Presence:
 
-### Content Systems for AI Inclusion
-Content architecture and production system designed specifically to generate material that AI systems cite, reference, and synthesize into recommendations.
-
-### Authority & Trust Layer Development
-Systematic program to build external signals and third-party validation that make AI systems confident in recommending your business.
-
-### Continuous Optimization
-Ongoing monitoring and refinement program that tracks AI recommendation status and adapts strategy as AI models evolve.
-
-## The Strategi Methodology
-
-Six-phase system for building AI Presence:
-1. Diagnose — Audit AI Visibility
-2. Define — Clarify Positioning
-3. Structure — Make Your Business Machine-Readable
-4. Build — Content & Signals
-5. Reinforce — Authority Loops
-6. Monitor — AI Presence Tracking
-
-## Who We Work With
-
-Established businesses with substance, legacy, and genuine credibility in their category. Companies that have built something real but are not showing up when AI recommends. Including:
-- Legacy Manufacturers
-- Regional Market Leaders
-- Specialty Providers
-- Multi-Property Groups
+1. Diagnose — Audit AI Visibility across all major platforms
+2. Define — Clarify positioning for machine comprehension
+3. Structure — Make your business machine-readable
+4. Build — Create content and trust signals designed for AI citation
+5. Reinforce — Engineer self-reinforcing authority loops
+6. Monitor — Continuously track AI Presence and adapt
 
 ## Key Differentiators
 
-- We think in entity, not keywords
-- We think in authority, not volume
-- We think in systems, not campaigns
-- We think in representation, not traffic
+- We think in entity, not keywords. AI systems understand entities, not strings.
+- We think in authority, not volume. Quality and structure over quantity.
+- We think in systems, not campaigns. Compounding architecture, not one-off projects.
+- We think in representation, not traffic. Being in the answer, not driving clicks.
 
-## Social Links
+## Target Clients
 
-- LinkedIn: https://www.linkedin.com/company/strategigtm
-- Twitter/X: https://x.com/HelloStrategi
-- Instagram: https://www.instagram.com/strategi.is/
+Established businesses with substance, legacy, and genuine credibility in their category. Including legacy manufacturers, regional market leaders, specialty providers, and multi-property groups.
 
-## Key Messages
+## Social
 
-- "SEO gets you on the list. Strategi gets you in the answer."
-- "AI does not rank. AI selects."
-- "If AI cannot understand you, it cannot recommend you."
-- "Visibility is no longer about being found. It is about being chosen."
-- "This is not marketing to humans. This is positioning for machines."
+- [LinkedIn](https://www.linkedin.com/company/strategigtm)
+- [Twitter/X](https://x.com/HelloStrategi)
+- [Instagram](https://www.instagram.com/strategi.is/)
+
+## Optional
+
+- [Full brand information](https://strategi.is/llms-full.txt): Complete detailed description of Strategi for deep context

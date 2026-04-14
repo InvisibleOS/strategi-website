@@ -27,7 +27,7 @@ const differentiators = [
 
 export default function WhyStrategi() {
   return (
-    <section id="why-strategi" className="bg-[#050505] py-24 md:py-40">
+    <section id="why-strategi" aria-label="Why Strategi: how we think differently about AI discovery" className="bg-[#050505] py-24 md:py-40">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <div className="mb-16 md:mb-24 flex flex-col md:flex-row gap-12 justify-between items-start">
           <div className="md:w-1/3">
