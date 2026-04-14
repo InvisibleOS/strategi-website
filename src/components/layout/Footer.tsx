@@ -50,10 +50,12 @@ export default function Footer() {
           </div>
           <div className="flex flex-col gap-3">
             {[
+              { label: "What We Do", href: "/#what-we-do" },
               { label: "How It Works", href: "/#how-it-works" },
               { label: "Why Strategi", href: "/#why-strategi" },
               { label: "Who It's For", href: "/#who-its-for" },
               { label: "FAQ", href: "/#faq" },
+              { label: "Contact", href: "/#contact" },
             ].map((link) => (
               <a
                 key={link.label}
@@ -140,12 +142,8 @@ export default function Footer() {
           className="flex flex-col gap-1 text-[9px] md:text-[10px] font-mono text-white/20 uppercase tracking-widest text-left md:text-right mb-4 md:mb-6"
         >
           <div className="flex flex-col md:flex-row gap-2 md:gap-4 mb-2">
-            <a href="#" className="hover:text-white transition-colors">
-              Terms
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Privacy
-            </a>
+            <span className="text-white/20 cursor-default">Terms</span>
+            <span className="text-white/20 cursor-default">Privacy</span>
           </div>
           <span>&copy; 2026 Strategi. All rights reserved.</span>
         </motion.div>

@@ -1,0 +1,16 @@
+{
+  "name": "Strategi — AI Presence Advisory",
+  "short_name": "Strategi",
+  "description": "Strategic advisory that builds AI Presence for established businesses.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#d4620a",
+  "icons": [
+    {
+      "src": "/strategi.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

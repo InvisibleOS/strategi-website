@@ -1,5 +1,8 @@
 # Strategi
 
+> Source: https://strategi.is/llms.txt
+> Last updated: 2026-04-14
+
 > Strategi is a strategic advisory for the AI discovery era. We make the right businesses get recommended by artificial intelligence. We are not an agency. We operate at the intersection of brand strategy, information architecture, and machine comprehension.
 
 ## About

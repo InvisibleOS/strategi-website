@@ -93,10 +93,25 @@ export default function WhyStrategi() {
         </div>
 
         <div className="mt-16 md:mt-24 border-l-2 border-[#d4620a] pl-8">
-          <p className="text-xl md:text-2xl text-white/50 font-light italic leading-relaxed max-w-3xl">
-            &ldquo;Visibility is no longer about being found. It is about being
-            chosen.&rdquo;
-          </p>
+          <blockquote className="text-xl md:text-2xl text-white/50 font-light italic leading-relaxed max-w-3xl">
+            <p>&ldquo;Visibility is no longer about being found. It is about being
+            chosen.&rdquo;</p>
+          </blockquote>
+        </div>
+
+        <div className="mt-12 flex flex-col sm:flex-row gap-6">
+          <a
+            href="#how-it-works"
+            className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
+          >
+            [ See the methodology ]
+          </a>
+          <a
+            href="#contact"
+            className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
+          >
+            [ Start a diagnostic ]
+          </a>
         </div>
       </div>
     </section>

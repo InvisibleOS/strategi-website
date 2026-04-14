@@ -69,14 +69,23 @@ export default function AnimatedProblem() {
             </p>
             <p>
               If your business is not in that answer, you do not exist in the
-              fastest-growing discovery channel on the planet. No amount of SEO
-              will fix this. This is a different system with different rules.
+              fastest-growing discovery channel on the planet. No amount of
+              traditional SEO or generative engine optimization alone will fix
+              this. This is a different system with different rules.
             </p>
+          <a
+            href="#how-it-works"
+            className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-[#d4620a] hover:text-white transition-colors mt-2"
+          >
+            [ See how we fix this ]
+          </a>
           </div>
         </motion.div>
 
         <motion.div
           className="relative bg-[#0a0a0a] border border-white/20 p-0 shadow-2xl"
+          role="img"
+          aria-label="Simulated AI query result showing your business missing from AI recommendations"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}

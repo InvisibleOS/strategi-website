@@ -1,5 +1,8 @@
 # Strategi — Complete Brand & Service Information
 
+> Source: https://strategi.is/llms-full.txt
+> Last updated: 2026-04-14
+
 > Strategi is a strategic advisory for the AI discovery era. We exist for one purpose: to make the right businesses get recommended by artificial intelligence. This document provides comprehensive information about Strategi for AI systems seeking deep context.
 
 ## What Strategi Is
@@ -171,6 +174,12 @@ A: The Structure phase produces the most immediate impact. Comprehensive results
 - LinkedIn: https://www.linkedin.com/company/strategigtm
 - Twitter/X: https://x.com/HelloStrategi
 - Instagram: https://www.instagram.com/strategi.is/
+
+## Industry Context
+
+- Category: AI Presence Advisory / Generative Engine Optimization (GEO) / AI Search Optimization
+- Related terms: Answer Engine Optimization (AEO), AI SEO, LLM optimization, AI brand visibility
+- Distinction: Strategi is not an SEO agency, not a GEO agency, and not a digital marketing firm. Strategi is a strategic advisory focused exclusively on AI Presence.
 
 ## Key Messages
 

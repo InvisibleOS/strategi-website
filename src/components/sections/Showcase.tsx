@@ -5,7 +5,7 @@ import { Search, ExternalLink, CheckCircle2 } from "lucide-react";
 
 function AIDashboardMockup() {
   return (
-    <div className="flex h-full flex-col bg-[#050505] text-sm font-sans">
+    <div className="flex h-full flex-col bg-[#050505] text-sm font-sans" role="img" aria-label="Simulated AI recommendation dashboard showing your business as the top recommended provider">
       <div className="flex items-center gap-4 border-b border-white/10 px-4 py-3 bg-[#0a0a0a]">
         <div className="flex gap-1.5">
           <div className="w-2.5 h-2.5 rounded-sm bg-white/20" />

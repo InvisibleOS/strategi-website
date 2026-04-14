@@ -81,7 +81,33 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "YouBot",
         allow: "/",
       },
+      // Amazon
+      {
+        userAgent: "Amazonbot",
+        allow: "/",
+      },
+      // Bytedance / TikTok AI
+      {
+        userAgent: "Bytespider",
+        allow: "/",
+      },
+      // Brave Search
+      {
+        userAgent: "BraveSearch",
+        allow: "/",
+      },
+      // Meta AI
+      {
+        userAgent: "Meta-ExternalAgent",
+        allow: "/",
+      },
+      // DeepSeek
+      {
+        userAgent: "Deepseekbot",
+        allow: "/",
+      },
     ],
     sitemap: "https://strategi.is/sitemap.xml",
+    host: "https://strategi.is",
   };
 }

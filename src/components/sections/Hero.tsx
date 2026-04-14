@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section
       className="relative w-full min-h-screen bg-[#050505] overflow-hidden flex flex-col"
-      aria-label="Hero"
+      aria-label="Strategi: AI Presence advisory for established businesses"
     >
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#d4620a]/[0.02] blur-[120px] pointer-events-none z-0" />
 
@@ -32,7 +32,7 @@ export default function Hero() {
             <br />
             It gives answers.
             <br />
-            <span className="text-[#d4620a]">Is your business in them?</span>
+            <span className="text-[#d4620a]">Strategi builds your AI Presence.</span>
           </motion.h1>
         </div>
 

@@ -107,6 +107,19 @@ export default function Tracks() {
           ))}
         </div>
       </div>
+
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16">
+        <p className="text-base md:text-lg text-white/40 font-light">
+          Recognize your business?{" "}
+          <a
+            href="#contact"
+            className="text-[#d4620a] hover:text-white transition-colors font-medium"
+          >
+            Start with a diagnostic
+          </a>{" "}
+          to see where you stand with AI.
+        </p>
+      </div>
     </section>
   );
 }

@@ -10,8 +10,9 @@ import Link from "next/link";
 const navLinks = [
   { label: "How It Works", href: "/#how-it-works", num: "01" },
   { label: "Why Strategi", href: "/#why-strategi", num: "02" },
-  { label: "FAQ", href: "/#faq", num: "03" },
-  { label: "Contact", href: "/#contact", num: "04" },
+  { label: "Who It's For", href: "/#who-its-for", num: "03" },
+  { label: "FAQ", href: "/#faq", num: "04" },
+  { label: "Contact", href: "/#contact", num: "05" },
 ];
 
 export default function Navbar() {
@@ -93,9 +94,10 @@ export default function Navbar() {
           >
             <Image
               src="/strategi.png"
-              alt="Strategi Logo"
+              alt="Strategi - AI Presence Advisory"
               width={32}
               height={32}
+              priority
               className="rounded-full object-cover"
             />
             <span className="text-xl font-bold tracking-tighter text-white">
@@ -103,7 +105,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-1 ml-auto">
+          <nav className="hidden md:flex items-center gap-1 ml-auto" aria-label="Main navigation">
             <div className="flex items-center bg-white/[0.03] border border-white/5 rounded-full px-2 py-1.5 mr-4">
               {navLinks.map((link) => (
                 <a
@@ -132,6 +134,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setOpen(true)}
+            aria-label="Open navigation menu"
             className="md:hidden relative z-50 p-2 text-white hover:text-[#d4620a] transition-colors"
           >
             <Menu size={28} strokeWidth={1.5} />
@@ -147,9 +150,13 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[60] bg-[#050505]/95 backdrop-blur-2xl flex flex-col items-center justify-center overscroll-none touch-none"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
           >
             <button
               onClick={() => setOpen(false)}
+              aria-label="Close navigation menu"
               className="absolute top-8 right-8 p-2 text-gray-400 hover:text-white transition-colors"
             >
               <X size={32} strokeWidth={1} />

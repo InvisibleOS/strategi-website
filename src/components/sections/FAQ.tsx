@@ -65,9 +65,9 @@ export default function FAQ() {
           </div>
           <a
             href="mailto:hello@strategi.is?subject=AI%20Presence%20Inquiry"
-            className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
+            className="text-xs font-mono uppercase tracking-[0.2em] text-white/60 hover:text-white transition-colors underline underline-offset-4 decoration-white/20"
           >
-            [ Contact Us ]
+            [ Request an AI Presence Diagnostic ]
           </a>
         </div>
 

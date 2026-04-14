@@ -1,13 +1,20 @@
 export function JsonLd() {
   const organizationSchema = {
-    "@context": "https://schema.org",
     "@type": "Organization",
     "@id": "https://strategi.is/#organization",
     name: "Strategi",
+    legalName: "Strategi",
     url: "https://strategi.is",
     logo: {
       "@type": "ImageObject",
+      "@id": "https://strategi.is/#logo",
       url: "https://strategi.is/strategi.png",
+      contentUrl: "https://strategi.is/strategi.png",
+      caption: "Strategi logo",
+      inLanguage: "en-US",
+    },
+    image: {
+      "@id": "https://strategi.is/#logo",
     },
     description:
       "Strategi is a strategic advisory for the AI discovery era. We make the right businesses get recommended by artificial intelligence.",
@@ -38,11 +45,13 @@ export function JsonLd() {
   };
 
   const serviceSchema = {
-    "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "@id": "https://strategi.is/#service",
-    name: "Strategi",
+    name: "Strategi - AI Presence Advisory",
     url: "https://strategi.is",
+    image: {
+      "@id": "https://strategi.is/#logo",
+    },
     provider: { "@id": "https://strategi.is/#organization" },
     description:
       "AI Presence advisory for established businesses. We build AI Presence through a six-phase methodology: Diagnose, Define, Structure, Build, Reinforce, and Monitor. We make businesses understandable, credible, and recommendable to AI systems including ChatGPT, Gemini, Perplexity, and Claude.",
@@ -50,58 +59,83 @@ export function JsonLd() {
       "@type": "Place",
       name: "Worldwide",
     },
-    serviceType: [
-      "AI Presence Advisory",
-      "AI Visibility Audit",
-      "AI Readability Consulting",
-      "Entity Optimization",
-    ],
+    serviceType: "AI Presence Advisory",
     hasOfferCatalog: {
       "@type": "OfferCatalog",
+      "@id": "https://strategi.is/#offer-catalog",
       name: "AI Presence Services",
       itemListElement: [
         {
-          "@type": "OfferCatalog",
-          name: "AI Visibility Audit",
-          description:
-            "Comprehensive diagnostic of how AI systems currently perceive, represent, and recommend your business. We query ChatGPT, Gemini, Perplexity, and Claude with real-world questions your customers ask and document exactly what happens.",
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            "@id": "https://strategi.is/#service-audit",
+            name: "AI Visibility Audit",
+            description:
+              "Comprehensive diagnostic of how AI systems currently perceive, represent, and recommend your business. We query ChatGPT, Gemini, Perplexity, and Claude with real-world questions your customers ask and document exactly what happens.",
+            provider: { "@id": "https://strategi.is/#organization" },
+          },
         },
         {
-          "@type": "OfferCatalog",
-          name: "Positioning & Clarity Engineering",
-          description:
-            "Strategic process that defines how your business should be understood by machines. Includes entity definition, category mapping, differentiator articulation, and semantic consistency across your digital footprint.",
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            "@id": "https://strategi.is/#service-positioning",
+            name: "Positioning & Clarity Engineering",
+            description:
+              "Strategic process that defines how your business should be understood by machines. Includes entity definition, category mapping, differentiator articulation, and semantic consistency across your digital footprint.",
+            provider: { "@id": "https://strategi.is/#organization" },
+          },
         },
         {
-          "@type": "OfferCatalog",
-          name: "Website Structuring for AI Readability",
-          description:
-            "Systematic restructuring of website information architecture, schema markup, content hierarchy, and semantic structure to make your website comprehensible to AI systems.",
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            "@id": "https://strategi.is/#service-structuring",
+            name: "Website Structuring for AI Readability",
+            description:
+              "Systematic restructuring of website information architecture, schema markup, content hierarchy, and semantic structure to make your website comprehensible to AI systems.",
+            provider: { "@id": "https://strategi.is/#organization" },
+          },
         },
         {
-          "@type": "OfferCatalog",
-          name: "Content Systems for AI Inclusion",
-          description:
-            "Content architecture and production system designed to generate material that AI systems cite, reference, and synthesize into recommendations.",
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            "@id": "https://strategi.is/#service-content",
+            name: "Content Systems for AI Inclusion",
+            description:
+              "Content architecture and production system designed to generate material that AI systems cite, reference, and synthesize into recommendations.",
+            provider: { "@id": "https://strategi.is/#organization" },
+          },
         },
         {
-          "@type": "OfferCatalog",
-          name: "Authority & Trust Layer Development",
-          description:
-            "Building external signals and third-party validation — structured data distribution, authoritative mentions, consistent entity information — that make AI confident in recommending your business.",
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            "@id": "https://strategi.is/#service-authority",
+            name: "Authority & Trust Layer Development",
+            description:
+              "Building external signals and third-party validation — structured data distribution, authoritative mentions, consistent entity information — that make AI confident in recommending your business.",
+            provider: { "@id": "https://strategi.is/#organization" },
+          },
         },
         {
-          "@type": "OfferCatalog",
-          name: "Continuous Optimization",
-          description:
-            "Ongoing monitoring and refinement program that tracks AI recommendation status and adapts strategy as AI models evolve and competitor positioning shifts.",
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            "@id": "https://strategi.is/#service-monitoring",
+            name: "Continuous Optimization",
+            description:
+              "Ongoing monitoring and refinement program that tracks AI recommendation status and adapts strategy as AI models evolve and competitor positioning shifts.",
+            provider: { "@id": "https://strategi.is/#organization" },
+          },
         },
       ],
     },
   };
 
   const websiteSchema = {
-    "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": "https://strategi.is/#website",
     name: "Strategi",
@@ -109,10 +143,10 @@ export function JsonLd() {
     description:
       "Strategic advisory for AI Presence. We make the right businesses get recommended by artificial intelligence.",
     publisher: { "@id": "https://strategi.is/#organization" },
+    inLanguage: "en-US",
   };
 
   const webPageSchema = {
-    "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": "https://strategi.is/#webpage",
     url: "https://strategi.is",
@@ -122,11 +156,23 @@ export function JsonLd() {
     isPartOf: { "@id": "https://strategi.is/#website" },
     about: { "@id": "https://strategi.is/#organization" },
     mainEntity: { "@id": "https://strategi.is/#service" },
+    breadcrumb: { "@id": "https://strategi.is/#breadcrumb" },
+    inLanguage: "en-US",
+    datePublished: "2026-01-01",
+    dateModified: "2026-04-14",
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: [
+        "section[aria-label*='Strategi'] h1",
+        "section[aria-label*='Strategi'] p",
+        "#faq",
+      ],
+    },
   };
 
   const breadcrumbSchema = {
-    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": "https://strategi.is/#breadcrumb",
     itemListElement: [
       {
         "@type": "ListItem",
@@ -138,8 +184,8 @@ export function JsonLd() {
   };
 
   const faqSchema = {
-    "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": "https://strategi.is/#faq",
     mainEntity: [
       {
         "@type": "Question",
@@ -208,26 +254,78 @@ export function JsonLd() {
     ],
   };
 
-  const schemas = [
-    organizationSchema,
-    serviceSchema,
-    websiteSchema,
-    webPageSchema,
-    breadcrumbSchema,
-    faqSchema,
-  ];
+  const howToSchema = {
+    "@type": "HowTo",
+    "@id": "https://strategi.is/#methodology",
+    name: "The Strategi Methodology: Six Phases to AI Presence",
+    description:
+      "Strategi builds AI Presence through a six-phase methodology. Each phase has clear objectives and measurable impact on how AI systems understand, categorize, and recommend your business.",
+    totalTime: "P6M",
+    step: [
+      {
+        "@type": "HowToStep",
+        position: 1,
+        name: "Diagnose — Audit AI Visibility",
+        text: "Query every major AI platform with the questions your customers ask. Document what AI says about your business, your competitors, and your category.",
+        url: "https://strategi.is/#how-it-works",
+      },
+      {
+        "@type": "HowToStep",
+        position: 2,
+        name: "Define — Clarify Positioning",
+        text: "Define how your business should be understood by machines. Entity definition, category mapping, differentiator articulation, and Machine Positioning Statement.",
+        url: "https://strategi.is/#how-it-works",
+      },
+      {
+        "@type": "HowToStep",
+        position: 3,
+        name: "Structure — Make Your Business Machine-Readable",
+        text: "Restructure digital presence for AI comprehension. Website architecture, schema implementation, content hierarchy, and semantic structuring.",
+        url: "https://strategi.is/#how-it-works",
+      },
+      {
+        "@type": "HowToStep",
+        position: 4,
+        name: "Build — Content & Signals",
+        text: "Produce strategically structured material designed to be cited by AI. Comprehensive category content, authoritative thought leadership, and structured data assets.",
+        url: "https://strategi.is/#how-it-works",
+      },
+      {
+        "@type": "HowToStep",
+        position: 5,
+        name: "Reinforce — Authority Loops",
+        text: "Build self-reinforcing authority loops. When AI cites you, that citation becomes a signal for future citations. Expand the scope of queries where your business is recommended.",
+        url: "https://strategi.is/#how-it-works",
+      },
+      {
+        "@type": "HowToStep",
+        position: 6,
+        name: "Monitor — AI Presence Tracking",
+        text: "Continuously track AI recommendation status. Which queries trigger recommendations, competitive landscape shifts, and model update impacts.",
+        url: "https://strategi.is/#how-it-works",
+      },
+    ],
+  };
+
+  const graphSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationSchema,
+      serviceSchema,
+      websiteSchema,
+      webPageSchema,
+      breadcrumbSchema,
+      faqSchema,
+      howToSchema,
+    ],
+  };
 
   return (
-    <>
-      {schemas.map((schema, i) => (
-        <script
-          key={i}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schema),
-          }}
-        />
-      ))}
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(graphSchema),
+      }}
+    />
   );
 }

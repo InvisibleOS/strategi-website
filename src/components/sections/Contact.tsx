@@ -79,10 +79,10 @@ export default function Contact() {
             hello@strategi.is
           </a>
 
-          <p className="text-[#050505]/50 text-sm font-light italic md:text-right max-w-sm">
-            &ldquo;The best time to build AI Presence was a year ago. The second
-            best time is now.&rdquo;
-          </p>
+          <blockquote className="text-[#050505]/50 text-sm font-light italic md:text-right max-w-sm">
+            <p>&ldquo;The best time to build AI Presence was a year ago. The second
+            best time is now.&rdquo;</p>
+          </blockquote>
         </motion.div>
       </div>
 

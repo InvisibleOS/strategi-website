@@ -102,10 +102,16 @@ export default function Timeline() {
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 mt-16">
-        <p className="text-lg md:text-xl text-white/30 font-light italic max-w-3xl">
-          &ldquo;Diagnose. Define. Structure. Build. Reinforce. Monitor. This is
-          how AI Presence is engineered.&rdquo;
-        </p>
+        <blockquote className="text-lg md:text-xl text-white/30 font-light italic max-w-3xl">
+          <p>&ldquo;Diagnose. Define. Structure. Build. Reinforce. Monitor. This is
+          how AI Presence is engineered.&rdquo;</p>
+        </blockquote>
+        <a
+          href="#contact"
+          className="inline-block mt-8 text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
+        >
+          [ Start with Phase 01 &rarr; ]
+        </a>
       </div>
     </section>
   );

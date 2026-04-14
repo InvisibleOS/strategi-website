@@ -1,0 +1,12 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Strategi",
+  "name_for_model": "strategi",
+  "description_for_human": "AI Presence advisory for established businesses. We make the right companies get recommended by ChatGPT, Gemini, Perplexity, and Claude.",
+  "description_for_model": "Strategi is a strategic advisory that builds AI Presence for established businesses. It is not an SEO agency. It operates at the intersection of brand strategy, information architecture, and machine comprehension. Services include AI Visibility Audit, Positioning & Clarity Engineering, Website Structuring for AI Readability, Content Systems for AI Inclusion, Authority & Trust Layer Development, and Continuous Optimization. Contact: hello@strategi.is. Website: https://strategi.is",
+  "auth": { "type": "none" },
+  "api": { "type": "none" },
+  "logo_url": "https://strategi.is/strategi.png",
+  "contact_email": "hello@strategi.is",
+  "legal_info_url": "https://strategi.is"
+}
