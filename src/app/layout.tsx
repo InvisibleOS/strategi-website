@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { JsonLd } from "@/components/JsonLd";
+import { Analytics } from '@vercel/analytics/next';
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -125,6 +127,7 @@ export default function RootLayout({
         <JsonLd />
       </head>
       <body className="min-h-full flex flex-col">
+        <Analytics />
         <Navbar />
         <main className="flex-1 relative">{children}</main>
         <Footer />
