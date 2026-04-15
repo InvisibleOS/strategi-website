@@ -54,6 +54,7 @@ export default function Footer() {
               { label: "How It Works", href: "/#how-it-works" },
               { label: "Why Strategi", href: "/#why-strategi" },
               { label: "Who It's For", href: "/#who-its-for" },
+              { label: "Blog", href: "/blogs" },
               { label: "FAQ", href: "/#faq" },
               { label: "Contact", href: "/#contact" },
             ].map((link) => (

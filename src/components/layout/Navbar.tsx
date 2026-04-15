@@ -11,8 +11,9 @@ const navLinks = [
   { label: "How It Works", href: "/#how-it-works", num: "01" },
   { label: "Why Strategi", href: "/#why-strategi", num: "02" },
   { label: "Who It's For", href: "/#who-its-for", num: "03" },
-  { label: "FAQ", href: "/#faq", num: "04" },
-  { label: "Contact", href: "/#contact", num: "05" },
+  { label: "Blog", href: "/blogs", num: "04" },
+  { label: "FAQ", href: "/#faq", num: "05" },
+  { label: "Contact", href: "/#contact", num: "06" },
 ];
 
 export default function Navbar() {
