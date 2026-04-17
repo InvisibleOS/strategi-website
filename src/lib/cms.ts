@@ -24,6 +24,24 @@ async function cmsRequest(
   return response;
 }
 
+export interface FeaturedImage {
+  url: string;
+  alt: string;
+  caption: string;
+  url_thumbnail: string;
+  url_card: string;
+  url_wide: string;
+}
+
+export interface RelatedPost {
+  title: string;
+  slug: string;
+  excerpt: string;
+  published_at: string;
+  featured_image_url: string | null;
+  category: { name: string; slug: string } | null;
+}
+
 export interface Post {
   title: string;
   slug: string;
@@ -34,7 +52,7 @@ export interface Post {
   author: { name: string; bio: string; avatar_url: string } | null;
   category: { name: string; slug: string } | null;
   tags: Array<{ name: string; slug: string }>;
-  featured_image: { url: string; alt: string; caption: string } | null;
+  featured_image: FeaturedImage | null;
   meta: {
     title: string;
     description: string;
@@ -42,12 +60,17 @@ export interface Post {
     og_title: string;
     og_description: string;
     og_image_url: string;
+    twitter_card: string;
+    twitter_title: string;
+    twitter_description: string;
+    twitter_image: string | null;
   };
   schema: {
     article: Record<string, unknown>;
     faq: Record<string, unknown> | null;
     breadcrumb: Record<string, unknown>;
   };
+  related?: RelatedPost[];
 }
 
 export interface PostListResponse {
@@ -67,6 +90,20 @@ export interface Tag {
   name: string;
   slug: string;
   post_count: number;
+}
+
+export interface ContentMapResponse {
+  total: number;
+  published: number;
+  in_draft: number;
+  gaps: number;
+  queries: Array<{
+    query: string;
+    priority: string;
+    status: string;
+    post_slug: string | null;
+    post_title: string | null;
+  }>;
 }
 
 export async function getBlogPosts(
@@ -107,8 +144,23 @@ export async function getTags(): Promise<{ tags: Tag[] }> {
   return res.json();
 }
 
+export async function getContentMap(): Promise<ContentMapResponse> {
+  const res = await cmsRequest("/content-map", 1800);
+  return res.json();
+}
+
 export async function getBlogSitemap(): Promise<string> {
   const res = await cmsRequest("/sitemap", 86400);
+  return res.text();
+}
+
+export async function getFeedXml(): Promise<string> {
+  const res = await cmsRequest("/feed.xml", 86400);
+  return res.text();
+}
+
+export async function getLlmsTxt(): Promise<string> {
+  const res = await cmsRequest("/llms.txt", 86400);
   return res.text();
 }
 

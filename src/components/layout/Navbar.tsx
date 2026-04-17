@@ -36,8 +36,10 @@ export default function Navbar() {
   }, [open]);
 
   useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+    const close = () => setOpen(false);
+    window.addEventListener("popstate", close);
+    return () => window.removeEventListener("popstate", close);
+  }, []);
 
   const handleNav = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -120,7 +122,7 @@ export default function Navbar() {
               ))}
             </div>
 
-            <a
+            <Link
               href="/#contact"
               onClick={(e) => handleNav(e, "/#contact")}
               className="group relative inline-flex items-center justify-center px-5 lg:px-6 py-2.5 overflow-hidden font-medium text-black transition duration-300 ease-out rounded-full shadow-md"
@@ -130,7 +132,7 @@ export default function Navbar() {
               <span className="relative flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
                 Start Diagnostic
               </span>
-            </a>
+            </Link>
           </nav>
 
           <button
@@ -150,7 +152,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[60] bg-[#050505]/95 backdrop-blur-2xl flex flex-col items-center justify-center overscroll-none touch-none"
+            className="fixed inset-0 z-[60] bg-[#050505]/95 backdrop-blur-2xl overflow-y-auto overscroll-none"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
@@ -158,51 +160,54 @@ export default function Navbar() {
             <button
               onClick={() => setOpen(false)}
               aria-label="Close navigation menu"
-              className="absolute top-8 right-8 p-2 text-gray-400 hover:text-white transition-colors"
+              className="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition-colors z-10"
             >
-              <X size={32} strokeWidth={1} />
+              <X size={28} strokeWidth={1} />
             </button>
 
-            <div className="w-full max-w-md px-8 flex flex-col gap-8">
-              <div className="flex flex-col gap-6">
-                {navLinks.map((link, i) => (
-                  <motion.div
-                    key={link.label}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 20, opacity: 0 }}
-                    transition={{ delay: 0.1 + i * 0.1 }}
-                  >
-                    <a
-                      href={link.href}
-                      onClick={(e) => handleNav(e, link.href)}
-                      className="group flex items-center gap-4 text-3xl md:text-4xl font-light text-white tracking-tight"
+            <div className="min-h-full flex flex-col justify-center px-6 py-20">
+              <div className="w-full max-w-sm mx-auto flex flex-col gap-6">
+                <div className="flex flex-col gap-4">
+                  {navLinks.map((link, i) => (
+                    <motion.div
+                      key={link.label}
+                      initial={{ y: 16, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: 16, opacity: 0 }}
+                      transition={{ delay: 0.05 + i * 0.06 }}
                     >
-                      <span className="text-xs font-mono text-[#d4620a] pt-2">
-                        {link.num}
-                      </span>
-                      <span className="group-hover:translate-x-2 transition-transform duration-300">
-                        {link.label}
-                      </span>
-                    </a>
-                    <div className="h-px w-full bg-white/5 mt-6" />
-                  </motion.div>
-                ))}
-              </div>
+                      <a
+                        href={link.href}
+                        onClick={(e) => handleNav(e, link.href)}
+                        className="group flex items-center gap-3 text-2xl font-light text-white tracking-tight"
+                      >
+                        <span className="text-[10px] font-mono text-[#d4620a] pt-1 shrink-0 w-5">
+                          {link.num}
+                        </span>
+                        <span className="group-hover:translate-x-1 transition-transform duration-300 truncate">
+                          {link.label}
+                        </span>
+                      </a>
+                      <div className="h-px w-full bg-white/5 mt-4" />
+                    </motion.div>
+                  ))}
+                </div>
 
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4 }}
-              >
-                <a
-                  href="/#contact"
-                  onClick={(e) => handleNav(e, "/#contact")}
-                  className="flex items-center justify-center gap-2 w-full py-4 bg-white text-black font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-[#d4620a] hover:text-white transition-colors duration-300"
+                <motion.div
+                  initial={{ y: 16, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                  className="mt-4"
                 >
-                  Start Diagnostic
-                </a>
-              </motion.div>
+                  <Link
+                    href="/#contact"
+                    onClick={(e) => handleNav(e, "/#contact")}
+                    className="flex items-center justify-center gap-2 w-full py-3.5 bg-white text-black font-bold uppercase tracking-widest text-xs rounded-lg hover:bg-[#d4620a] hover:text-white transition-colors duration-300"
+                  >
+                    Start Diagnostic
+                  </Link>
+                </motion.div>
+              </div>
             </div>
           </motion.div>
         )}
