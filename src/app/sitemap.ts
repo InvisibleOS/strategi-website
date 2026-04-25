@@ -7,7 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date("2026-04-14"),
+      lastModified: new Date("2026-04-25"),
       changeFrequency: "weekly",
       priority: 1,
     },
@@ -16,6 +16,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/ai-seo`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.95,
     },
   ];
 

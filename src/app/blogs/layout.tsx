@@ -9,6 +9,12 @@ export default function BlogsLayout({ children }: { children: ReactNode }) {
         title="Strategi Blog — RSS Feed"
         href="https://strategi.is/feed.xml"
       />
+      <link
+        rel="alternate"
+        type="text/markdown"
+        title="Strategi Blog — llms.txt index"
+        href="https://strategi.is/blogs/llms.txt"
+      />
       {children}
     </>
   );

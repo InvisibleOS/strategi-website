@@ -1,3 +1,5 @@
+// Site-wide schemas (Organization, ProfessionalService, WebSite) — render in layout.
+// Homepage-specific schemas (WebPage, BreadcrumbList, FAQPage, HowTo) live in HomepageJsonLd.
 export function JsonLd() {
   const organizationSchema = {
     "@type": "Organization",
@@ -146,6 +148,23 @@ export function JsonLd() {
     inLanguage: "en-US",
   };
 
+  const graphSchema = {
+    "@context": "https://schema.org",
+    "@graph": [organizationSchema, serviceSchema, websiteSchema],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(graphSchema),
+      }}
+    />
+  );
+}
+
+// Homepage-specific schemas. Mount only in src/app/page.tsx.
+export function HomepageJsonLd() {
   const webPageSchema = {
     "@type": "WebPage",
     "@id": "https://strategi.is/#webpage",
@@ -159,7 +178,7 @@ export function JsonLd() {
     breadcrumb: { "@id": "https://strategi.is/#breadcrumb" },
     inLanguage: "en-US",
     datePublished: "2026-01-01",
-    dateModified: "2026-04-14",
+    dateModified: "2026-04-25",
     speakable: {
       "@type": "SpeakableSpecification",
       cssSelector: [
@@ -200,7 +219,7 @@ export function JsonLd() {
         name: "How is this different from SEO?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "SEO optimizes for search engine rankings and clicks. AI Presence is fundamentally different. AI does not return lists. It returns answers. We do not optimize for keywords or backlinks. We build your business as a well-defined entity that AI can comprehend, categorize, and recommend. Different system, different rules, different approach.",
+          text: "SEO optimizes for search engine rankings and clicks. AI Presence is fundamentally different. AI does not return lists. It returns answers. We do not optimize for keywords or backlinks. We build your business as a well-defined entity that AI can comprehend, categorize, and recommend.",
         },
       },
       {
@@ -208,7 +227,7 @@ export function JsonLd() {
         name: "What does the engagement look like?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Every engagement starts with a diagnostic. We query AI systems about your business and category, documenting what AI says, what it misses, and what it gets wrong. From there, we build a strategic roadmap across six phases: Diagnose, Define, Structure, Build, Reinforce, and Monitor. Each phase has clear objectives and measurable impact.",
+          text: "Every engagement starts with a diagnostic. We query AI systems about your business and category, documenting what AI says, what it misses, and what it gets wrong. From there, we build a strategic roadmap across six phases: Diagnose, Define, Structure, Build, Reinforce, and Monitor.",
         },
       },
       {
@@ -216,7 +235,7 @@ export function JsonLd() {
         name: "How do you measure success?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "We track one metric: whether AI recommends you. We monitor your recommendation status across major AI platforms, track which queries trigger your inclusion, benchmark against competitors, and measure changes as models update. When AI recommends you, we reinforce. When it does not, we diagnose and fix.",
+          text: "We track one metric: whether AI recommends you. We monitor your recommendation status across major AI platforms, track which queries trigger your inclusion, benchmark against competitors, and measure changes as models update.",
         },
       },
       {
@@ -224,7 +243,7 @@ export function JsonLd() {
         name: "Why do you not publish case studies?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "AI Presence strategy is inherently competitive. When a business becomes the recommended answer in its category, that position displaces someone else. Revealing the approach gives competitors a blueprint to counter it. Our clients chose us in part because we protect their competitive edge, not publicize it. We share results under NDA during diagnostic conversations.",
+          text: "AI Presence strategy is inherently competitive. When a business becomes the recommended answer in its category, that position displaces someone else. Revealing the approach gives competitors a blueprint to counter it. We share results under NDA during diagnostic conversations.",
         },
       },
       {
@@ -232,7 +251,7 @@ export function JsonLd() {
         name: "Who is this for?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Established businesses with substance, legacy, and genuine credibility in their category. Companies that have built something real but are not showing up when AI recommends. We are not for startups looking for a growth hack. We are for businesses that deserve to be recommended.",
+          text: "Established businesses with substance, legacy, and genuine credibility in their category. Companies that have built something real but are not showing up when AI recommends. We are not for startups looking for a growth hack.",
         },
       },
       {
@@ -248,7 +267,7 @@ export function JsonLd() {
         name: "Is there a minimum commitment?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. AI Presence is not a one-time project. It is a system that compounds. We work in focused, phase-based engagements with clear objectives and defined outputs. The depth of strategic work required demands sustained attention and execution.",
+          text: "Yes. AI Presence is not a one-time project. It is a system that compounds. We work in focused, phase-based engagements with clear objectives and defined outputs.",
         },
       },
     ],
@@ -309,15 +328,7 @@ export function JsonLd() {
 
   const graphSchema = {
     "@context": "https://schema.org",
-    "@graph": [
-      organizationSchema,
-      serviceSchema,
-      websiteSchema,
-      webPageSchema,
-      breadcrumbSchema,
-      faqSchema,
-      howToSchema,
-    ],
+    "@graph": [webPageSchema, breadcrumbSchema, faqSchema, howToSchema],
   };
 
   return (

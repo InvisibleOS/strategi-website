@@ -131,69 +131,6 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1 relative">{children}</main>
         <Footer />
-
-        {/* Noscript fallback: essential content visible to crawlers with JS disabled */}
-        <noscript>
-          <div
-            style={{
-              position: "absolute",
-              width: "1px",
-              height: "1px",
-              padding: "0",
-              margin: "-1px",
-              overflow: "hidden",
-              clip: "rect(0, 0, 0, 0)",
-              whiteSpace: "nowrap",
-              borderWidth: "0",
-            }}
-          >
-            <h1>Strategi — AI Presence for Established Businesses</h1>
-            <p>
-              Strategi is a strategic advisory for the AI discovery era. We exist
-              for one purpose: to make the right businesses get recommended by
-              artificial intelligence.
-            </p>
-            <p>
-              When someone asks ChatGPT, Gemini, Perplexity, or any AI system
-              for a recommendation in your category, you are either in the answer
-              or you are not. There is no page two. There is only inclusion or
-              exclusion. Strategi ensures inclusion.
-            </p>
-            <h2>Services</h2>
-            <ul>
-              <li>
-                AI Visibility Audit — Comprehensive diagnostic of how AI systems
-                perceive and recommend your business.
-              </li>
-              <li>
-                Positioning and Clarity Engineering — Defining how your business
-                should be understood by machines.
-              </li>
-              <li>
-                Website Structuring for AI Readability — Making your website
-                comprehensible to AI systems.
-              </li>
-              <li>
-                Content Systems for AI Inclusion — Building content that AI
-                systems cite and recommend.
-              </li>
-              <li>
-                Authority and Trust Layer Development — Building trust signals
-                that make AI confident in recommending you.
-              </li>
-              <li>
-                Continuous Optimization — Ongoing monitoring and adaptation as AI
-                models evolve.
-              </li>
-            </ul>
-            <h2>Methodology</h2>
-            <p>
-              Six phases: Diagnose, Define, Structure, Build, Reinforce, Monitor.
-            </p>
-            <h2>Contact</h2>
-            <p>Email: hello@strategi.is | Website: strategi.is</p>
-          </div>
-        </noscript>
       </body>
     </html>
   );

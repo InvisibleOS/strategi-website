@@ -59,8 +59,8 @@ export async function POST(request: NextRequest) {
 
   revalidatePath("/feed.xml");
   revalidated.push("/feed.xml");
-  revalidatePath("/llms.txt");
-  revalidated.push("/llms.txt");
+  revalidatePath("/blogs/llms.txt");
+  revalidated.push("/blogs/llms.txt");
   revalidatePath("/sitemap.xml");
   revalidated.push("/sitemap.xml");
 

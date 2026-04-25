@@ -51,10 +51,10 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full md:w-auto">
               <a
-                href="#how-it-works"
+                href="/ai-seo"
                 className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors shrink-0"
               >
-                [ How we work ]
+                [ AI SEO ]
               </a>
               <a
                 href="#contact"

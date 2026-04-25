@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
 import AnimatedProblem from "@/components/sections/AnimatedProblem";
+import { HomepageJsonLd } from "@/components/JsonLd";
 
 // Below-the-fold sections are code-split so they don't block FCP/LCP.
 // ssr: true keeps SEO content in the initial HTML — only the JS bundle is split.
@@ -15,6 +16,7 @@ const Contact = dynamic(() => import("@/components/sections/Contact"));
 export default function Home() {
   return (
     <>
+      <HomepageJsonLd />
       <Hero />
       <AnimatedProblem />
       <Showcase />
