@@ -1,12 +1,16 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
 import AnimatedProblem from "@/components/sections/AnimatedProblem";
-import Showcase from "@/components/sections/Showcase";
-import Timeline from "@/components/sections/Timeline";
-import WhyStrategi from "@/components/sections/WhyStrategi";
-import Tracks from "@/components/sections/Tracks";
-import About from "@/components/sections/About";
-import FAQ from "@/components/sections/FAQ";
-import Contact from "@/components/sections/Contact";
+
+// Below-the-fold sections are code-split so they don't block FCP/LCP.
+// ssr: true keeps SEO content in the initial HTML — only the JS bundle is split.
+const Showcase = dynamic(() => import("@/components/sections/Showcase"));
+const Timeline = dynamic(() => import("@/components/sections/Timeline"));
+const WhyStrategi = dynamic(() => import("@/components/sections/WhyStrategi"));
+const Tracks = dynamic(() => import("@/components/sections/Tracks"));
+const About = dynamic(() => import("@/components/sections/About"));
+const FAQ = dynamic(() => import("@/components/sections/FAQ"));
+const Contact = dynamic(() => import("@/components/sections/Contact"));
 
 export default function Home() {
   return (
