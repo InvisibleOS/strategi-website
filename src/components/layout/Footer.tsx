@@ -143,6 +143,12 @@ export default function Footer() {
           className="flex flex-col gap-1 text-[9px] md:text-[10px] font-mono text-white/20 uppercase tracking-widest text-left md:text-right mb-4 md:mb-6"
         >
           <div className="flex flex-col md:flex-row gap-2 md:gap-4 mb-2">
+            <a
+              href="/sitemap"
+              className="text-white/40 hover:text-white transition-colors"
+            >
+              Sitemap
+            </a>
             <span className="text-white/20 cursor-default">Terms</span>
             <span className="text-white/20 cursor-default">Privacy</span>
           </div>

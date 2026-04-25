@@ -118,8 +118,6 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM information" />
-        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM detailed information" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="author" href="https://strategi.is" />
         <link rel="preconnect" href="https://app.cal.com" />
