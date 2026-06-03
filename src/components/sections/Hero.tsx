@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -50,12 +51,12 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full md:w-auto">
-              <a
-                href="/ai-seo"
+              <Link
+                href="/who-owns-ai"
                 className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors shrink-0"
               >
-                [ AI SEO ]
-              </a>
+                [ Who owns AI? ]
+              </Link>
               <a
                 href="#contact"
                 className="bg-white text-[#050505] text-sm font-bold px-8 py-4 hover:bg-[#d4620a] hover:text-white transition-colors w-full sm:w-auto text-center shrink-0"

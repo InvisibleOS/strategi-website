@@ -8,6 +8,8 @@ import { HomepageJsonLd } from "@/components/JsonLd";
 const Showcase = dynamic(() => import("@/components/sections/Showcase"));
 const Timeline = dynamic(() => import("@/components/sections/Timeline"));
 const WhyStrategi = dynamic(() => import("@/components/sections/WhyStrategi"));
+const Intelligence = dynamic(() => import("@/components/sections/Intelligence"));
+const Industries = dynamic(() => import("@/components/sections/Industries"));
 const Tracks = dynamic(() => import("@/components/sections/Tracks"));
 const About = dynamic(() => import("@/components/sections/About"));
 const FAQ = dynamic(() => import("@/components/sections/FAQ"));
@@ -22,6 +24,8 @@ export default function Home() {
       <Showcase />
       <Timeline />
       <WhyStrategi />
+      <Intelligence />
+      <Industries />
       <Tracks />
       <About />
       <FAQ />

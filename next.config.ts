@@ -51,6 +51,17 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      // /ai-seo has been retired and folded into the GEO/About narrative.
+      // Permanent redirect preserves any accumulated link/AI authority.
+      {
+        source: "/ai-seo",
+        destination: "/about",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

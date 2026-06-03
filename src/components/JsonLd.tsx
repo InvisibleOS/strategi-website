@@ -1,6 +1,22 @@
+import { SITE_URL, FOUNDERS } from "@/lib/site";
+
 // Site-wide schemas (Organization, ProfessionalService, WebSite) — render in layout.
 // Homepage-specific schemas (WebPage, BreadcrumbList, FAQPage, HowTo) live in HomepageJsonLd.
 export function JsonLd() {
+  // Founder Person entities. @id matches the fuller Person nodes emitted on
+  // /about, so search engines stitch them into one entity.
+  const founderSchema = FOUNDERS.map((f) => {
+    const sameAs = [f.linkedin, f.instagram, f.x].filter(Boolean);
+    return {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#${f.id}`,
+      name: f.name,
+      jobTitle: f.role,
+      image: `${SITE_URL}${f.photo}`,
+      ...(sameAs.length ? { sameAs } : {}),
+    };
+  });
+
   const organizationSchema = {
     "@type": "Organization",
     "@id": "https://strategi.is/#organization",
@@ -21,6 +37,7 @@ export function JsonLd() {
     description:
       "Strategi is a strategic advisory for the AI discovery era. We make the right businesses get recommended by artificial intelligence.",
     foundingDate: "2026",
+    founder: founderSchema,
     slogan: "SEO gets you on the list. Strategi gets you in the answer.",
     knowsAbout: [
       "AI Presence",

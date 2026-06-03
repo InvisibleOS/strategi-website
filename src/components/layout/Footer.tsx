@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { INDUSTRIES } from "@/lib/industries";
 
 export default function Footer() {
   const ref = useRef(null);
@@ -13,7 +14,7 @@ export default function Footer() {
       className="bg-[#050505] border-t border-white/10 pt-24 md:pt-40 px-6 md:px-12 overflow-hidden flex flex-col justify-between"
       aria-label="Site footer"
     >
-      <div className="max-w-[1400px] mx-auto w-full grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-24 md:mb-32 relative z-10">
+      <div className="max-w-[1400px] mx-auto w-full grid grid-cols-2 md:grid-cols-5 gap-12 md:gap-8 mb-24 md:mb-32 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -50,6 +51,7 @@ export default function Footer() {
           </div>
           <div className="flex flex-col gap-3">
             {[
+              { label: "About", href: "/about" },
               { label: "What We Do", href: "/#what-we-do" },
               { label: "How It Works", href: "/#how-it-works" },
               { label: "Why Strategi", href: "/#why-strategi" },
@@ -108,15 +110,51 @@ export default function Footer() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-col"
+        >
+          <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#d4620a] mb-6">
+            Intelligence
+          </div>
+          <div className="flex flex-col gap-3">
+            {[
+              { label: "Who Owns AI?", href: "/who-owns-ai" },
+              { label: "AI Answer Demo", href: "/ai-answer-demo" },
+              { label: "GEO ROI Calculator", href: "/geo-roi-calculator" },
+              { label: "Manifesto", href: "/about#manifesto" },
+            ].map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-sm md:text-base text-white/50 hover:text-white transition-colors font-light w-fit group flex items-center gap-2"
+              >
+                <span className="w-0 h-px bg-[#d4620a] transition-all duration-300 group-hover:w-3" />
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
           className="flex flex-col col-span-2 md:col-span-1 mt-8 md:mt-0"
         >
           <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#d4620a] mb-6">
-            About
+            Who Owns AI
           </div>
-          <p className="text-sm text-white/40 leading-relaxed font-light">
-            Strategi is a strategic advisory for the AI discovery era. We make
-            the right businesses get recommended by artificial intelligence.
-          </p>
+          <div className="grid grid-cols-2 md:grid-cols-1 gap-x-6 gap-y-3">
+            {INDUSTRIES.map((ind) => (
+              <a
+                key={ind.slug}
+                href={`/who-owns-ai/${ind.slug}`}
+                className="text-sm md:text-base text-white/50 hover:text-white transition-colors font-light w-fit group flex items-center gap-2"
+              >
+                <span className="w-0 h-px bg-[#d4620a] transition-all duration-300 group-hover:w-3" />
+                {ind.name}
+              </a>
+            ))}
+          </div>
         </motion.div>
       </div>
 

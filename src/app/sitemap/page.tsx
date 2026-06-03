@@ -2,12 +2,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getBlogPosts } from "@/lib/cms";
 import type { Post } from "@/lib/cms";
+import { INDUSTRIES } from "@/lib/industries";
 
 const SITE_URL = "https://strategi.is";
 const PAGE_URL = `${SITE_URL}/sitemap`;
 
 export const metadata: Metadata = {
-  title: "Sitemap",
+  title: "Sitemap — AI Presence Advisory",
   description:
     "Every page on Strategi. A complete index of insights, services, and resources for AI Presence advisory.",
   alternates: { canonical: PAGE_URL },
@@ -39,7 +40,7 @@ function CollectionSchema({ sections }: { sections: Section[] }) {
     name: "Strategi sitemap",
     url: PAGE_URL,
     description: "Complete index of pages on strategi.is",
-    isPartOf: { "@type": "WebSite", name: "Strategi", url: SITE_URL },
+    isPartOf: { "@id": `${SITE_URL}/#website` },
     mainEntity: {
       "@type": "ItemList",
       itemListElement: sections.flatMap((s, sIdx) =>
@@ -134,9 +135,26 @@ export default async function SitemapPage() {
       label: "Pages",
       items: [
         { href: "/", label: "Home", date: "Always current" },
-        { href: "/ai-seo", label: "AI SEO Advisory", date: "Always current" },
+        { href: "/about", label: "About Strategi", date: "Always current" },
         { href: "/blogs", label: "Insights", date: "Always current" },
       ],
+    },
+    {
+      label: "Intelligence",
+      items: [
+        { href: "/who-owns-ai", label: "Who Owns AI? — The Index", date: "Live" },
+        { href: "/ai-answer-demo", label: "The AI Answer Demo", date: "Live" },
+        { href: "/geo-roi-calculator", label: "GEO ROI Calculator", date: "Live" },
+        { href: "/about#manifesto", label: "The Manifesto", date: "Always current" },
+      ],
+    },
+    {
+      label: "Who Owns AI — by industry",
+      items: INDUSTRIES.map((i) => ({
+        href: `/who-owns-ai/${i.slug}`,
+        label: `GEO for ${i.name}`,
+        date: "Live",
+      })),
     },
     {
       label: "Insights",

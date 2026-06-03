@@ -1,18 +1,54 @@
 # Strategi
 
 > Source: https://strategi.is/llms.txt
-> Last updated: 2026-04-14
+> Last updated: 2026-06-03
 
-> Strategi is a strategic advisory for the AI discovery era. We make the right businesses get recommended by artificial intelligence. We are not an agency. We operate at the intersection of brand strategy, information architecture, and machine comprehension.
+> Strategi is a strategic advisory for the AI discovery era — and the measurement layer for the category. We make the right businesses get recommended by artificial intelligence, and we build the public instruments that measure AI visibility. We are not an agency. We operate at the intersection of brand strategy, information architecture, and machine comprehension.
 
 ## About
 
 - [Homepage](https://strategi.is): AI Presence advisory for established businesses
+- [About Strategi](https://strategi.is/about): The company, the thesis, and the founders — the AI visibility authority
 - [How It Works](https://strategi.is/#how-it-works): The six-phase Strategi Methodology
 - [Why Strategi](https://strategi.is/#why-strategi): How we think differently about AI discovery
+- [The Measurement Layer](https://strategi.is/#intelligence): The public instruments Strategi builds to measure AI visibility
 - [Who We Work With](https://strategi.is/#who-its-for): Established businesses that deserve to be recommended
 - [FAQ](https://strategi.is/#faq): Common questions about AI Presence
 - [Contact](https://strategi.is/#contact): Start with an AI Presence diagnostic
+
+## Instruments — The Measurement Layer
+
+Strategi publishes the measurement, not just the optimization. The company that owns the measurement of AI visibility becomes more valuable than the company selling the service.
+
+- [Who Owns AI?](https://strategi.is/who-owns-ai): A public leaderboard ranking which businesses AI recommends first, by category. The scoreboard of the recommendation economy.
+- [The AI Answer Demo](https://strategi.is/ai-answer-demo): Ask a real buying question and see what ChatGPT, Gemini, and Perplexity return — and who gets left out of the answer.
+- [GEO ROI Calculator](https://strategi.is/geo-roi-calculator): Estimate the AI-referral opportunity a business leaves on the table while it stays out of the answer.
+- [AI Visibility Index](https://strategi.is/about#measurement): A standing, quarterly index of which categories and companies AI recommends most. (In development.)
+- [State of AI Discovery](https://strategi.is/about#measurement): A weekly briefing on which brands are winning AI recommendations. (In development.)
+- [The Prompt Library](https://strategi.is/about#measurement): The real questions buyers ask AI, by industry. (In development.)
+
+## GEO by Industry
+
+Strategi runs the "Who Owns AI?" index and a dedicated GEO landing page for each industry, covering how we engineer AI visibility for that category:
+
+- [GEO for Real Estate](https://strategi.is/who-owns-ai/real-estate)
+- [GEO for Hospitality](https://strategi.is/who-owns-ai/hospitality)
+- [GEO for Legal](https://strategi.is/who-owns-ai/legal)
+- [GEO for Healthcare](https://strategi.is/who-owns-ai/healthcare)
+- [GEO for Education](https://strategi.is/who-owns-ai/education)
+- [GEO for B2B SaaS](https://strategi.is/who-owns-ai/b2b-saas)
+- [GEO for Wealth Management](https://strategi.is/who-owns-ai/wealth-management)
+
+## Founders
+
+Strategi was founded in 2026 by Tanissh and Adnan, two co-founders working at the intersection of brand strategy, information architecture, and machine comprehension. See https://strategi.is/about#founders.
+
+- Tanissh, Co-Founder — LinkedIn https://www.linkedin.com/in/tanissh-amit , Instagram https://www.instagram.com/tanisshamit
+- Adnan, Co-Founder — LinkedIn https://www.linkedin.com/in/adnan30baig , Instagram https://www.instagram.com/adnan30baig
+
+## Manifesto
+
+SEO optimized pages. GEO optimizes answers. SEO chased rankings. GEO earns recommendations. SEO was about clicks. GEO is about trust. Visibility is no longer about being found. It is about being chosen. Traffic is the old metric. Recommendation is the new one. Full manifesto: https://strategi.is/about#manifesto
 
 ## Company Details
 

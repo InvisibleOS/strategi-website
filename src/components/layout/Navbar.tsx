@@ -8,8 +8,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
-  { label: "AI SEO", href: "/ai-seo", num: "01" },
-  { label: "Blog", href: "/blogs", num: "02" },
+  { label: "Who Owns AI", href: "/who-owns-ai", num: "01" },
+  { label: "About", href: "/about", num: "02" },
+  { label: "Blog", href: "/blogs", num: "03" },
 ];
 
 export default function Navbar() {
