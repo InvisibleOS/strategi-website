@@ -37,7 +37,7 @@ export default function Industries() {
               transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.4, 0.25, 1] }}
               className="mt-8 text-base md:text-lg text-white/40 font-light max-w-xl leading-relaxed"
             >
-              Every category has a business AI names first — and the rest it rarely
+              Every category has a business AI names first, and the rest it rarely
               mentions. See the board and the playbook for yours.
             </motion.p>
           </div>

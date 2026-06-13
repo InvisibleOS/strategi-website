@@ -8,9 +8,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
-  { label: "Who Owns AI", href: "/who-owns-ai", num: "01" },
-  { label: "About", href: "/about", num: "02" },
-  { label: "Blog", href: "/blogs", num: "03" },
+  { label: "Services", href: "/services", num: "01" },
+  { label: "Products", href: "/products", num: "02" },
+  { label: "Who Owns AI", href: "/who-owns-ai", num: "03" },
+  { label: "About", href: "/about", num: "04" },
+  { label: "Blog", href: "/blogs", num: "05" },
 ];
 
 export default function Navbar() {
@@ -132,12 +134,12 @@ export default function Navbar() {
             <Link
               href="/#contact"
               onClick={(e) => handleNav(e, "/#contact")}
-              className="group relative inline-flex items-center justify-center px-5 lg:px-6 py-2.5 overflow-hidden font-medium text-black transition duration-300 ease-out rounded-full shadow-md"
+              className="group relative inline-flex items-center justify-center px-6 lg:px-8 py-3 lg:py-3.5 overflow-hidden font-medium text-black transition duration-300 ease-out rounded-full shadow-md"
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-white via-gray-200 to-gray-400" />
               <span className="absolute top-0 right-0 block w-64 h-64 -mr-16 -mt-16 bg-white opacity-20 transform rotate-45 translate-x-full group-hover:translate-x-0 transition-all duration-700 ease-in-out" />
-              <span className="relative flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
-                Start Diagnostic
+              <span className="relative flex items-center gap-2 text-sm font-bold tracking-widest uppercase">
+                Book a Call
               </span>
             </Link>
           </nav>
@@ -209,9 +211,9 @@ export default function Navbar() {
                   <Link
                     href="/#contact"
                     onClick={(e) => handleNav(e, "/#contact")}
-                    className="flex items-center justify-center gap-2 w-full py-3.5 bg-white text-black font-bold uppercase tracking-widest text-xs rounded-lg hover:bg-[#d4620a] hover:text-white transition-colors duration-300"
+                    className="flex items-center justify-center gap-2 w-full py-5 bg-white text-black font-bold uppercase tracking-widest text-sm rounded-lg hover:bg-[#d4620a] hover:text-white transition-colors duration-300"
                   >
-                    Start Diagnostic
+                    Book a Call
                   </Link>
                 </motion.div>
               </div>

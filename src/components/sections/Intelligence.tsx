@@ -37,7 +37,7 @@ export default function Intelligence() {
           >
             The company that owns the measurement of AI visibility becomes more
             valuable than the company selling the service. So we built the
-            instruments — open to everyone — that make the recommendation economy
+            instruments, open to everyone, that make the recommendation economy
             legible.
           </motion.p>
         </div>

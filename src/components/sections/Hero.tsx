@@ -29,11 +29,11 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
             className="text-[12vw] sm:text-[10vw] md:text-[8vw] font-bold tracking-tighter leading-[0.85] text-white"
           >
-            AI does not show lists.
+            Your customers have
             <br />
-            It gives answers.
+            stopped searching.
             <br />
-            <span className="text-[#d4620a]">Strategi builds your AI Presence.</span>
+            <span className="text-[#d4620a]">They have started asking AI.</span>
           </motion.h1>
         </div>
 
@@ -45,9 +45,10 @@ export default function Hero() {
         >
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 md:gap-4">
             <p className="text-sm md:text-base text-white/40 leading-relaxed max-w-md font-light">
-              Strategi builds AI Presence for established businesses. We make
-              sure the right companies get recommended when AI answers the
-              questions that matter.
+              Strategi builds your AI Presence. Through Generative Engine
+              Optimization (GEO), we make established businesses the answer when
+              ChatGPT, Gemini, and Perplexity recommend a company in your
+              category.
             </p>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full md:w-auto">
@@ -59,9 +60,9 @@ export default function Hero() {
               </Link>
               <a
                 href="#contact"
-                className="bg-white text-[#050505] text-sm font-bold px-8 py-4 hover:bg-[#d4620a] hover:text-white transition-colors w-full sm:w-auto text-center shrink-0"
+                className="bg-white text-[#050505] text-base md:text-lg font-bold px-10 py-5 hover:bg-[#d4620a] hover:text-white transition-colors w-full sm:w-auto text-center shrink-0"
               >
-                Find out if AI recommends you &rarr;
+                Book a call &rarr;
               </a>
             </div>
           </div>

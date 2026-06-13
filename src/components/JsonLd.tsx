@@ -257,14 +257,6 @@ export function HomepageJsonLd() {
       },
       {
         "@type": "Question",
-        name: "Why do you not publish case studies?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "AI Presence strategy is inherently competitive. When a business becomes the recommended answer in its category, that position displaces someone else. Revealing the approach gives competitors a blueprint to counter it. We share results under NDA during diagnostic conversations.",
-        },
-      },
-      {
-        "@type": "Question",
         name: "Who is this for?",
         acceptedAnswer: {
           "@type": "Answer",
@@ -277,14 +269,6 @@ export function HomepageJsonLd() {
         acceptedAnswer: {
           "@type": "Answer",
           text: "The Structure phase typically produces the most immediate impact on AI recommendations. Comprehensive results across all major AI platforms develop over 3 to 6 months of continuous execution as your authority compounds and AI models update with new training data.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Is there a minimum commitment?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes. AI Presence is not a one-time project. It is a system that compounds. We work in focused, phase-based engagements with clear objectives and defined outputs.",
         },
       },
     ],
@@ -301,44 +285,44 @@ export function HomepageJsonLd() {
       {
         "@type": "HowToStep",
         position: 1,
-        name: "Diagnose — Audit AI Visibility",
+        name: "Diagnose: Audit AI Visibility",
         text: "Query every major AI platform with the questions your customers ask. Document what AI says about your business, your competitors, and your category.",
-        url: "https://strategi.is/#how-it-works",
+        url: "https://strategi.is/services",
       },
       {
         "@type": "HowToStep",
         position: 2,
-        name: "Define — Clarify Positioning",
+        name: "Define: Clarify Positioning",
         text: "Define how your business should be understood by machines. Entity definition, category mapping, differentiator articulation, and Machine Positioning Statement.",
-        url: "https://strategi.is/#how-it-works",
+        url: "https://strategi.is/services",
       },
       {
         "@type": "HowToStep",
         position: 3,
-        name: "Structure — Make Your Business Machine-Readable",
+        name: "Structure: Make Your Business Machine-Readable",
         text: "Restructure digital presence for AI comprehension. Website architecture, schema implementation, content hierarchy, and semantic structuring.",
-        url: "https://strategi.is/#how-it-works",
+        url: "https://strategi.is/services",
       },
       {
         "@type": "HowToStep",
         position: 4,
-        name: "Build — Content & Signals",
+        name: "Build: Content and Signals",
         text: "Produce strategically structured material designed to be cited by AI. Comprehensive category content, authoritative thought leadership, and structured data assets.",
-        url: "https://strategi.is/#how-it-works",
+        url: "https://strategi.is/services",
       },
       {
         "@type": "HowToStep",
         position: 5,
-        name: "Reinforce — Authority Loops",
+        name: "Reinforce: Authority Loops",
         text: "Build self-reinforcing authority loops. When AI cites you, that citation becomes a signal for future citations. Expand the scope of queries where your business is recommended.",
-        url: "https://strategi.is/#how-it-works",
+        url: "https://strategi.is/services",
       },
       {
         "@type": "HowToStep",
         position: 6,
-        name: "Monitor — AI Presence Tracking",
+        name: "Monitor: AI Presence Tracking",
         text: "Continuously track AI recommendation status. Which queries trigger recommendations, competitive landscape shifts, and model update impacts.",
-        url: "https://strategi.is/#how-it-works",
+        url: "https://strategi.is/services",
       },
     ],
   };

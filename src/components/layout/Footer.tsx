@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import Link from "next/link";
 import { INDUSTRIES } from "@/lib/industries";
 
 export default function Footer() {
@@ -31,12 +32,12 @@ export default function Footer() {
             hello@strategi.is
           </a>
           <div className="mt-8">
-            <a
-              href="mailto:hello@strategi.is?subject=AI%20Presence%20Diagnostic"
-              className="inline-block text-[10px] font-mono uppercase tracking-widest text-white/80 border border-white/20 hover:border-white hover:bg-white hover:text-[#050505] px-4 py-2 transition-all"
+            <Link
+              href="/#contact"
+              className="inline-block text-xs font-mono uppercase tracking-widest text-white/80 border border-white/20 hover:border-white hover:bg-white hover:text-[#050505] px-7 py-4 transition-all"
             >
-              Start Diagnostic &rarr;
-            </a>
+              Book a Call &rarr;
+            </Link>
           </div>
         </motion.div>
 
@@ -51,11 +52,11 @@ export default function Footer() {
           </div>
           <div className="flex flex-col gap-3">
             {[
+              { label: "Services", href: "/services" },
+              { label: "Products", href: "/products" },
               { label: "About", href: "/about" },
-              { label: "What We Do", href: "/#what-we-do" },
-              { label: "How It Works", href: "/#how-it-works" },
               { label: "Why Strategi", href: "/#why-strategi" },
-              { label: "Who It's For", href: "/#who-its-for" },
+              { label: "Industries", href: "/#by-industry" },
               { label: "Blog", href: "/blogs" },
               { label: "FAQ", href: "/#faq" },
               { label: "Contact", href: "/#contact" },
@@ -113,14 +114,14 @@ export default function Footer() {
           className="flex flex-col"
         >
           <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#d4620a] mb-6">
-            Intelligence
+            Products &amp; Tools
           </div>
           <div className="flex flex-col gap-3">
             {[
+              { label: "Tolstoy", href: "/products#tolstoy" },
               { label: "Who Owns AI?", href: "/who-owns-ai" },
               { label: "AI Answer Demo", href: "/ai-answer-demo" },
               { label: "GEO ROI Calculator", href: "/geo-roi-calculator" },
-              { label: "Manifesto", href: "/about#manifesto" },
             ].map((link) => (
               <a
                 key={link.label}

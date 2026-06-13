@@ -1,43 +1,44 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const phases = [
   {
     id: "01",
     title: "Diagnose.",
     subtitle: "Audit AI Visibility",
-    desc: "We query every major AI platform with the questions your customers ask. We document what AI says about you, your competitors, and your category. The output is a comprehensive AI Visibility Report.",
+    desc: "We query every major AI platform with your customers' questions and document where you stand against your category.",
   },
   {
     id: "02",
     title: "Define.",
     subtitle: "Clarify Positioning",
-    desc: "We define how your business should be understood by machines. Entity definition, category mapping, differentiator articulation, and a Machine Positioning Statement that drives all subsequent work.",
+    desc: "We define how machines should understand your business: entity, category, differentiators, and a positioning statement that guides everything after.",
   },
   {
     id: "03",
     title: "Structure.",
     subtitle: "Machine-Readable",
-    desc: "We restructure your digital presence for AI comprehension. Website architecture, schema implementation, content hierarchy, and semantic structuring that AI can trust, parse, and cite.",
+    desc: "We rebuild your site and content for AI comprehension, with the architecture, schema, and semantics AI can parse and trust.",
   },
   {
     id: "04",
     title: "Build.",
     subtitle: "Content & Signals",
-    desc: "We produce strategically structured material designed to be cited by AI. Comprehensive category content, authoritative thought leadership, and structured data assets. Simultaneously building external trust signals.",
+    desc: "We produce the structured, citable content and external trust signals AI pulls its answers from.",
   },
   {
     id: "05",
     title: "Reinforce.",
     subtitle: "Authority Loops",
-    desc: "We engineer self-reinforcing authority loops. When AI cites you, that citation becomes a signal for future citations. We expand the scope of queries where your business is recommended.",
+    desc: "We turn each AI citation into a signal for the next, expanding the queries where you get recommended.",
   },
   {
     id: "06",
     title: "Monitor.",
     subtitle: "AI Presence Tracking",
-    desc: "We continuously track your AI recommendation status. Which queries trigger recommendations, which competitors gain or lose AI share, and which model updates affect your positioning.",
+    desc: "We track your recommendation status across platforms as competitors shift and models update.",
   },
 ];
 
@@ -81,7 +82,7 @@ export default function Timeline() {
                 <div className="flex items-center gap-3 mb-10">
                   <div className="w-1.5 h-1.5 bg-white/20 group-hover:bg-[#d4620a] transition-colors duration-500" />
                   <span className="font-mono text-[10px] text-white/40 uppercase tracking-[0.2em]">
-                    Phase_{item.id} &mdash; {item.subtitle}
+                    Phase_{item.id} / {item.subtitle}
                   </span>
                 </div>
               </div>
@@ -106,12 +107,12 @@ export default function Timeline() {
           <p>&ldquo;Diagnose. Define. Structure. Build. Reinforce. Monitor. This is
           how AI Presence is engineered.&rdquo;</p>
         </blockquote>
-        <a
-          href="#contact"
+        <Link
+          href="/#contact"
           className="inline-block mt-8 text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
         >
-          [ Start with Phase 01 &rarr; ]
-        </a>
+          [ Book a call &rarr; ]
+        </Link>
       </div>
     </section>
   );

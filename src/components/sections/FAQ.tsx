@@ -21,20 +21,12 @@ const faqs = [
     a: "We track one metric: whether AI recommends you. We monitor your recommendation status across major AI platforms, track which queries trigger your inclusion, benchmark against competitors, and measure changes as models update. When AI recommends you, we reinforce. When it does not, we diagnose and fix.",
   },
   {
-    q: "Why do you not publish case studies?",
-    a: "AI Presence strategy is inherently competitive. When a business becomes the recommended answer in its category, that position displaces someone else. Revealing the approach gives competitors a blueprint to counter it. Our clients chose us in part because we protect their competitive edge, not publicize it. We share results under NDA during diagnostic conversations.",
-  },
-  {
     q: "Who is this for?",
     a: "Established businesses with substance, legacy, and genuine credibility in their category. Companies that have built something real but are not showing up when AI recommends. We are not for startups looking for a growth hack. We are not for brands without a track record. We are for businesses that deserve to be recommended.",
   },
   {
     q: "How long does it take to see results?",
     a: "The Structure phase typically produces the most immediate impact on AI recommendations. Comprehensive results across all major AI platforms develop over 3 to 6 months of continuous execution as your authority compounds and AI models update with new training data.",
-  },
-  {
-    q: "Is there a minimum commitment?",
-    a: "Yes. AI Presence is not a one-time project. It is a system that compounds. We work in focused, phase-based engagements with clear objectives and defined outputs. The depth of strategic work required demands sustained attention and execution.",
   },
 ];
 

@@ -41,9 +41,9 @@ function AIDashboardMockup() {
 
             <ul className="mt-6 space-y-3">
               {[
-                "Category Authority — Verified across multiple sources",
-                "Entity Clarity — Well-defined positioning and differentiators",
-                "Trust Signals — Consistent, corroborated information",
+                "Category Authority: verified across multiple sources",
+                "Entity Clarity: well-defined positioning and differentiators",
+                "Trust Signals: consistent, corroborated information",
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3">
                   <div className="w-1 h-1 rounded-full bg-[#d4620a]" />
@@ -89,9 +89,7 @@ export default function Showcase() {
               <span className="text-[#d4620a]">AI Presence.</span>
             </h2>
             <p className="mx-auto max-w-lg text-base text-white/40 font-light leading-relaxed">
-              We make your business understandable, credible, and recommendable
-              to the AI systems that are increasingly deciding which companies
-              people choose.
+              What it looks like when the answer is you.
             </p>
           </div>
         }

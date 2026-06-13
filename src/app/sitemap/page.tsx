@@ -135,14 +135,17 @@ export default async function SitemapPage() {
       label: "Pages",
       items: [
         { href: "/", label: "Home", date: "Always current" },
+        { href: "/services", label: "Services", date: "Always current" },
+        { href: "/products", label: "Products", date: "Always current" },
         { href: "/about", label: "About Strategi", date: "Always current" },
         { href: "/blogs", label: "Insights", date: "Always current" },
       ],
     },
     {
-      label: "Intelligence",
+      label: "Products & Tools",
       items: [
-        { href: "/who-owns-ai", label: "Who Owns AI? — The Index", date: "Live" },
+        { href: "/products#tolstoy", label: "Tolstoy, our AI Presence platform", date: "Early access" },
+        { href: "/who-owns-ai", label: "Who Owns AI?, the Index", date: "Live" },
         { href: "/ai-answer-demo", label: "The AI Answer Demo", date: "Live" },
         { href: "/geo-roi-calculator", label: "GEO ROI Calculator", date: "Live" },
         { href: "/about#manifesto", label: "The Manifesto", date: "Always current" },

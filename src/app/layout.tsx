@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "lenis/dist/lenis.css";
+import { ReactLenis } from "lenis/react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Intro from "@/components/layout/Intro";
 import { JsonLd } from "@/components/JsonLd";
 import { Analytics } from '@vercel/analytics/next';
 
@@ -125,6 +128,8 @@ export default function RootLayout({
         <JsonLd />
       </head>
       <body className="min-h-full flex flex-col">
+        <ReactLenis root options={{ lerp: 0.1, smoothWheel: true }} />
+        <Intro />
         <Analytics />
         <Navbar />
         <main className="flex-1 relative">{children}</main>

@@ -6,22 +6,22 @@ const differentiators = [
   {
     id: "01",
     title: "Entity, not keywords.",
-    desc: "Search engines match strings. AI systems understand entities. We build your business as a well-defined entity that AI can comprehend, categorize, and recommend.",
+    desc: "Search matches keywords. AI understands entities, so we build your business as one it can recognize and recommend.",
   },
   {
     id: "02",
     title: "Authority, not volume.",
-    desc: "Publishing more content does not make AI recommend you. Building genuine authority in a specific domain does. We focus on the quality and structure of your information ecosystem, not the quantity.",
+    desc: "More content does not move AI. Genuine authority in your domain does, so we build for quality, not quantity.",
   },
   {
     id: "03",
     title: "Systems, not campaigns.",
-    desc: "AI Presence is not a one-time project. It is a system that compounds. We build architectures that become more effective over time as AI models evolve and your authority deepens.",
+    desc: "AI Presence is not a campaign. It is a system that compounds as models evolve and your authority deepens.",
   },
   {
     id: "04",
     title: "Representation, not traffic.",
-    desc: "We do not measure success by how many people visited your website. We measure it by whether AI includes you in the answer. That is the metric that matters now.",
+    desc: "We do not count visits. We measure whether AI puts you in the answer, the metric that matters now.",
   },
 ];
 
@@ -57,10 +57,9 @@ export default function WhyStrategi() {
               }}
               className="text-base md:text-lg text-white/40 font-light max-w-xl leading-relaxed"
             >
-              The market is full of companies rebranding yesterday&apos;s tactics
-              under today&apos;s buzzwords. Strategi was built from the ground up
-              around a single reality: AI systems are becoming the primary
-              discovery mechanism for businesses.
+              The market is full of agencies rebranding old SEO tactics with
+              new buzzwords. We were built natively for how AI discovers and
+              recommends businesses instead.
             </motion.p>
           </div>
         </div>
@@ -99,18 +98,18 @@ export default function WhyStrategi() {
           </blockquote>
         </div>
 
-        <div className="mt-12 flex flex-col sm:flex-row gap-6">
+        <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-6">
           <a
-            href="#how-it-works"
+            href="#contact"
+            className="inline-flex items-center gap-2 bg-white text-[#050505] text-base md:text-lg font-bold px-10 py-5 hover:bg-[#d4620a] hover:text-white transition-colors"
+          >
+            Book a call &rarr;
+          </a>
+          <a
+            href="/services"
             className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
           >
             [ See the methodology ]
-          </a>
-          <a
-            href="#contact"
-            className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors"
-          >
-            [ Start a diagnostic ]
           </a>
         </div>
       </div>

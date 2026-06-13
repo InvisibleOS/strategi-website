@@ -57,24 +57,24 @@ export default function AnimatedProblem() {
             The Problem
           </p>
           <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-[0.9] mb-8 text-white">
-            Your customers have stopped searching.
+            AI search returns one answer,
             <br />
-            <span className="text-white/30">They have started asking.</span>
+            <span className="text-white/30">not ten blue links.</span>
           </h2>
           <div className="space-y-6 text-base md:text-lg text-white/50 font-light max-w-lg leading-relaxed">
             <p>
-              They ask ChatGPT. They ask Gemini. They ask Perplexity. And these
-              systems do not return ten blue links. They return one answer. Maybe
-              two. Maybe three.
+              Buyers now ask ChatGPT, Gemini, and Perplexity instead of scrolling
+              a results page. These AI systems do not return a list. They return
+              one recommendation. Maybe two or three.
             </p>
             <p>
-              If your business is not in that answer, you do not exist in the
-              fastest-growing discovery channel on the planet. No amount of
-              traditional SEO or generative engine optimization alone will fix
-              this. This is a different system with different rules.
+              If your business is not in that answer, you are invisible in the
+              fastest-growing discovery channel on the planet. Traditional SEO
+              alone will not fix this. AI discovery is a different system with
+              different rules, and it needs Generative Engine Optimization (GEO).
             </p>
           <a
-            href="#how-it-works"
+            href="/services"
             className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-[#d4620a] hover:text-white transition-colors mt-2"
           >
             [ See how we fix this ]
@@ -132,9 +132,9 @@ export default function AnimatedProblem() {
                 </motion.div>
 
                 {[
-                  "Competitor A — Recommended for market leadership.",
-                  "Competitor B — Recommended for service depth.",
-                  "Competitor C — Recommended for trust signals.",
+                  "Competitor A: recommended for market leadership.",
+                  "Competitor B: recommended for service depth.",
+                  "Competitor C: recommended for trust signals.",
                 ].map((text, i) => (
                   <motion.div
                     key={i}

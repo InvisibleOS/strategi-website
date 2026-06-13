@@ -1,27 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const targets = [
   {
     id: "01",
     title: "Legacy Manufacturers",
-    desc: "Forty-year-old businesses with deep industry credibility, completely absent from AI recommendations. We take them from invisibility to consistent citation across major AI platforms.",
+    desc: "Decades of credibility, absent from AI recommendations. We take them from invisible to consistently cited.",
   },
   {
     id: "02",
     title: "Regional Market Leaders",
-    desc: "Respected businesses with strong local reputation but zero AI presence. We restructure their digital foundation to function as a machine-readable authority in their geographic market.",
+    desc: "Strong local reputation, zero AI presence. We rebuild their foundation into a machine-readable regional authority.",
   },
   {
     id: "03",
     title: "Specialty Providers",
-    desc: "Niche experts being overlooked by AI in favor of larger, less specialized competitors. We rebuild their content architecture and authority layer to become the specialist recommendation.",
+    desc: "Niche experts overlooked by AI for bigger generalists. We rebuild their authority to become the specialist recommendation.",
   },
   {
     id: "04",
     title: "Multi-Property Groups",
-    desc: "Organizations where each property is treated as a disconnected entity by AI. We unify entity architecture and build property-level authority for consistent AI-generated recommendations.",
+    desc: "Properties AI treats as disconnected. We unify entity architecture for consistent recommendations across all of them.",
   },
 ];
 
@@ -75,7 +76,7 @@ export default function Tracks() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group relative bg-[#050505] p-8 md:p-10 min-h-[320px] flex flex-col justify-between overflow-hidden hover:bg-[#0a0a0a] transition-colors duration-500"
+              className="group relative bg-[#050505] p-8 md:p-10 min-h-[260px] flex flex-col justify-between overflow-hidden hover:bg-[#0a0a0a] transition-colors duration-500"
             >
               <div
                 className="absolute -right-4 -top-8 text-[140px] font-bold text-white/[0.02] leading-none pointer-events-none select-none group-hover:text-[#d4620a]/[0.03] transition-colors duration-700"
@@ -111,12 +112,12 @@ export default function Tracks() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16">
         <p className="text-base md:text-lg text-white/40 font-light">
           Recognize your business?{" "}
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             className="text-[#d4620a] hover:text-white transition-colors font-medium"
           >
-            Start with a diagnostic
-          </a>{" "}
+            Book a call
+          </Link>{" "}
           to see where you stand with AI.
         </p>
       </div>

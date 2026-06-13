@@ -5,25 +5,41 @@
   --foreground: #ededed;
   --accent: #d4620a;
   --muted: #777777;
+
+  /* shadcn-compatible tokens, mapped to the Strategi palette so any
+     @/components/ui primitive (e.g. product-card) renders on-brand.
+     --primary is stored as raw HSL channels so hsl(var(--primary)) works. */
+  --card: #0a0a0a;
+  --card-foreground: #ededed;
+  --muted-foreground: #8a8a8a;
+  --primary: 24 91% 44%; /* #d4620a */
+  --primary-foreground: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: var(--primary-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 html {
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+  /* `clip`, not `hidden`: hidden would make html/body a scroll container and
+     break `position: sticky` descendants (the stacking cards). clip prevents
+     horizontal overflow without creating a scrollport. Lenis owns smoothing. */
+  overflow-x: clip;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Selection */
