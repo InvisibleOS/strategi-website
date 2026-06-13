@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     "AI search optimization",
     "omni-channel GEO",
     "get recommended by ChatGPT",
+    "secure website development",
+    "website cybersecurity",
+    "secure web development",
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
@@ -259,25 +262,209 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Websites */}
+        {/* GEO blogs and authority content */}
         <section
-          aria-label="Websites built for SEO and GEO"
-          className="px-6 md:px-12 py-24 md:py-40 border-t border-white/10 bg-white/[0.01]"
+          aria-label="GEO blogs and authority content built to be cited by AI"
+          className="px-6 md:px-12 py-24 md:py-40 border-t border-white/10"
         >
-          <div className="max-w-[1400px] mx-auto">
-            <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-[#d4620a] mb-8">
-              Websites / SEO + GEO
-            </p>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter leading-[0.9] text-white mb-8 max-w-4xl">
-              Websites of every kind,{" "}
-              <span className="text-white/30">built for SEO and GEO.</span>
-            </h2>
-            <p className="text-base md:text-lg text-white/50 font-light max-w-2xl leading-relaxed">
-              Your website is still the first thing AI reads. We build sites of
-              every kind for both SEO and GEO: clean architecture, fast
-              performance, complete schema, and machine-readable content that
-              search engines rank and AI engines can cite.
-            </p>
+          <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+            <div>
+              <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-[#d4620a] mb-8">
+                GEO Blogs / Authority content
+              </p>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter leading-[0.9] text-white mb-8">
+                Content engineered to be{" "}
+                <span className="text-white/30">the source AI quotes.</span>
+              </h2>
+              <p className="text-base md:text-lg text-white/50 font-light leading-relaxed">
+                AI answers are assembled from content models can trust and
+                extract. We publish editorial built around the real questions
+                buyers ask AI, structured so a model can lift your answer and
+                attribute it to you. Authority, not blog filler.
+              </p>
+            </div>
+            <div className="space-y-8 lg:pt-20">
+              {[
+                {
+                  h: "Built around real buyer questions",
+                  p: "We map the prompts buyers actually ask AI in your category and write the definitive answer to each, so you become the source the model reaches for.",
+                },
+                {
+                  h: "Structured to be extracted and cited",
+                  p: "Clear claims, definitions, stats, comparisons, and FAQ blocks with schema. We format content the way AI parses it, so it can quote and attribute you.",
+                },
+                {
+                  h: "Authority that compounds",
+                  p: "A focused library of genuinely useful, in-depth pieces beats a content mill. Each one deepens your topical authority and earns more citations over time.",
+                },
+              ].map((item) => (
+                <div key={item.h} className="border-l-2 border-[#d4620a]/40 pl-6">
+                  <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white mb-3">
+                    {item.h}
+                  </h3>
+                  <p className="text-sm md:text-base text-white/40 font-light leading-relaxed">
+                    {item.p}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Websites — the highlight */}
+        <section
+          aria-label="Websites built for SEO, GEO, and security"
+          className="relative overflow-hidden border-t border-white/10 px-6 md:px-12 py-24 md:py-40 bg-white/[0.01]"
+        >
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-1/3 right-0 h-[60vh] w-[55vw] rounded-full bg-[#d4620a]/[0.05] blur-[160px]"
+          />
+
+          <div className="relative z-10 mx-auto max-w-[1400px]">
+            {/* header */}
+            <div className="mb-16 md:mb-24 flex flex-col md:flex-row gap-12 justify-between items-start">
+              <div className="md:w-1/3">
+                <p className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#d4620a]">
+                  Websites / Design &middot; SEO + GEO &middot; Security
+                </p>
+              </div>
+              <div className="md:w-2/3">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter leading-[0.9] text-white mb-8">
+                  Websites built to rank, to be cited,{" "}
+                  <span className="text-white/30">and to stay secure.</span>
+                </h2>
+                <p className="text-base md:text-lg text-white/50 font-light max-w-xl leading-relaxed">
+                  Your website is the first thing AI reads, and the first thing
+                  attackers probe. We design and build sites of every kind, from
+                  marketing sites to full platforms, engineered for SEO and GEO
+                  and hardened against threats from day one.
+                </p>
+              </div>
+            </div>
+
+            {/* build pillars — sharp hairline grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px border border-white/10 bg-white/10">
+              {[
+                {
+                  title: "Bespoke design & build",
+                  desc: "Custom design and clean, modern code. No bloated templates.",
+                },
+                {
+                  title: "SEO + GEO optimized",
+                  desc: "Complete schema and machine-readable structure that Google ranks and AI cites.",
+                },
+                {
+                  title: "Fast & accessible",
+                  desc: "Strong Core Web Vitals, responsive on every device, accessible by standard.",
+                },
+                {
+                  title: "Scalable & easy to run",
+                  desc: "A CMS your team can actually use, built to grow with you.",
+                },
+              ].map((f, i) => (
+                <div
+                  key={f.title}
+                  className="group relative bg-[#050505] p-8 md:p-10 min-h-[240px] flex flex-col justify-between hover:bg-[#0a0a0a] transition-colors duration-500"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 bg-white/20 group-hover:bg-[#d4620a] transition-colors duration-500" />
+                    <span className="font-mono text-[10px] text-white/40 uppercase tracking-[0.2em]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-bold tracking-tighter text-white mb-3">
+                      {f.title}
+                    </h3>
+                    <p className="text-sm text-white/40 font-light leading-relaxed">
+                      {f.desc}
+                    </p>
+                  </div>
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-[#d4620a] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
+                </div>
+              ))}
+            </div>
+
+            {/* cybersecurity — editorial copy + live-headers terminal */}
+            <div className="mt-24 md:mt-32 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#d4620a] mb-6">
+                  Cybersecurity / Secure by default
+                </p>
+                <h3 className="text-3xl md:text-4xl font-bold tracking-tighter text-white mb-6">
+                  Hardened from day one,{" "}
+                  <span className="text-white/30">not as an afterthought.</span>
+                </h3>
+                <p className="text-base md:text-lg text-white/50 font-light leading-relaxed max-w-xl mb-10">
+                  Every site we ship is locked down out of the box. A site
+                  customers and AI trust is one that cannot be quietly defaced,
+                  hijacked, or leaked.
+                </p>
+                <ul className="space-y-4 max-w-md">
+                  {[
+                    "HTTPS everywhere with HSTS preload",
+                    "Strict Content-Security-Policy and hardened response headers",
+                    "Cross-origin isolation against injection and clickjacking",
+                    "Dependency audits and DDoS-resistant hosting",
+                  ].map((p) => (
+                    <li key={p} className="flex items-start gap-3">
+                      <span
+                        aria-hidden="true"
+                        className="mt-2 w-1.5 h-1.5 bg-[#d4620a] shrink-0"
+                      />
+                      <span className="text-sm md:text-base text-white/60 font-light leading-relaxed">
+                        {p}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* terminal */}
+              <div
+                className="relative bg-[#0a0a0a] border border-white/15 shadow-2xl font-mono"
+                role="img"
+                aria-label="Terminal showing the security response headers every Strategi website ships with"
+              >
+                <div className="flex items-center justify-between border-b border-white/15 px-4 py-3 bg-white/[0.02]">
+                  <div className="flex gap-2" aria-hidden="true">
+                    <div className="w-2 h-2 bg-white/20" />
+                    <div className="w-2 h-2 bg-white/20" />
+                    <div className="w-2 h-2 bg-white/20" />
+                  </div>
+                  <span className="text-[10px] uppercase tracking-widest text-white/30">
+                    Security headers // scan
+                  </span>
+                </div>
+                <div className="p-5 md:p-6 text-xs md:text-[13px] leading-relaxed overflow-x-auto">
+                  <p className="text-white/45">
+                    $ curl -sI https://yourbusiness.com
+                  </p>
+                  <p className="text-[#d4620a] mt-3">HTTP/2 200</p>
+                  {[
+                    [
+                      "strict-transport-security",
+                      "max-age=63072000; includeSubDomains; preload",
+                    ],
+                    ["content-security-policy", "default-src 'self'; object-src 'none'"],
+                    ["x-frame-options", "DENY"],
+                    ["x-content-type-options", "nosniff"],
+                    ["cross-origin-opener-policy", "same-origin"],
+                    ["referrer-policy", "strict-origin-when-cross-origin"],
+                    ["permissions-policy", "camera=(), geolocation=()"],
+                  ].map(([k, v]) => (
+                    <p key={k} className="whitespace-nowrap">
+                      <span className="text-white/70">{k}:</span>{" "}
+                      <span className="text-white/35">{v}</span>
+                    </p>
+                  ))}
+                  <p className="text-emerald-400/80 mt-3">
+                    &#10003; Hardened by default. No open doors.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

@@ -144,7 +144,7 @@ export default async function SitemapPage() {
     {
       label: "Products & Tools",
       items: [
-        { href: "/products#tolstoy", label: "Tolstoy, our AI Presence platform", date: "Early access" },
+        { href: "/products#tolstoy", label: "Tolstoy, our GEO content platform", date: "Early access" },
         { href: "/who-owns-ai", label: "Who Owns AI?, the Index", date: "Live" },
         { href: "/ai-answer-demo", label: "The AI Answer Demo", date: "Live" },
         { href: "/geo-roi-calculator", label: "GEO ROI Calculator", date: "Live" },

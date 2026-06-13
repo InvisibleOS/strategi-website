@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Layers, LineChart } from "lucide-react";
+import { Layers, Feather } from "lucide-react";
 import { ProductHighlightCard } from "@/components/ui/product-card";
 
 const paths = [
@@ -19,13 +19,13 @@ const paths = [
   {
     href: "/products",
     category: "Self-serve",
-    icon: <LineChart className="h-5 w-5" />,
+    icon: <Feather className="h-5 w-5" />,
     title: "Tolstoy",
     description:
-      "Track how ChatGPT, Gemini, and Perplexity recommend you, plus free GEO tools.",
+      "Our platform that turns a brief into fact-grounded blog content engineered to be cited by AI. Plus free GEO tools.",
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=480&h=480&q=80",
-    imageAlt: "Analytics dashboard with charts",
+      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=480&h=480&q=80",
+    imageAlt: "Writing a blog post on a laptop",
   },
 ];
 
