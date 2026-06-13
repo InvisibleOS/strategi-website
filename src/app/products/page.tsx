@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE_URL, CONTACT_EMAIL } from "@/lib/site";
+import { SITE_URL } from "@/lib/site";
 import { JsonLd } from "@/components/geo/Editorial";
+import EarlyAccessForm from "@/components/EarlyAccessForm";
 
 const PAGE_URL = `${SITE_URL}/products`;
 const OG_IMAGE = `${SITE_URL}/strategi.png`;
-
-const WAITLIST = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-  "Tolstoy early access"
-)}&body=${encodeURIComponent(
-  "I'd like early access to Tolstoy. Here is my business:"
-)}`;
 
 export const metadata: Metadata = {
   title: "Tolstoy: GEO Content Platform by Strategi",
@@ -182,12 +177,7 @@ export default function ProductsPage() {
               content or request one-off posts.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <a
-                href={WAITLIST}
-                className="bg-white text-[#050505] text-base md:text-lg font-bold px-10 py-5 hover:bg-[#d4620a] hover:text-white transition-colors text-center"
-              >
-                Get early access &rarr;
-              </a>
+              <EarlyAccessForm label="Get early access" />
               <a
                 href="#pipeline"
                 className="border border-white/20 text-white/85 text-base md:text-lg font-medium px-10 py-5 hover:border-white/40 hover:text-white transition-colors text-center"
@@ -428,6 +418,72 @@ export default function ProductsPage() {
           </div>
         </section>
 
+        {/* End to end: schema + auto-publish (roadmap) */}
+        <section
+          aria-label="From approved to published, automatically"
+          className="px-6 md:px-12 py-24 md:py-40 border-b border-white/10 bg-white/[0.01]"
+        >
+          <div className="max-w-[1400px] mx-auto">
+            <div className="mb-12 md:mb-16 flex flex-col md:flex-row gap-12 justify-between items-start">
+              <div className="md:w-1/3">
+                <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-[#d4620a]">
+                  End to end
+                </p>
+                <span className="mt-4 inline-block text-[10px] font-mono uppercase tracking-widest px-2 py-1 border text-white/50 border-white/20">
+                  Coming soon
+                </span>
+              </div>
+              <div className="md:w-2/3">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter leading-[0.9] text-white mb-8">
+                  From approved{" "}
+                  <span className="text-white/30">to published, automatically.</span>
+                </h2>
+                <p className="text-base md:text-lg text-white/50 font-light max-w-xl leading-relaxed">
+                  Approve the final draft and Tolstoy takes it the rest of the
+                  way. It generates the structured data for the post and
+                  publishes it straight to your site, all from inside the tool.
+                  No exporting, no copy-paste, no separate SEO pass. Brief to
+                  live, end to end.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px border border-white/10 bg-white/10">
+              {[
+                {
+                  id: "01",
+                  title: "Automatic schema",
+                  desc: "Tolstoy generates the JSON-LD for every post (Article, FAQPage, breadcrumbs) so it is machine-readable and eligible for rich results the moment it goes live, no manual markup.",
+                },
+                {
+                  id: "02",
+                  title: "One-click publish",
+                  desc: "Approve, and the finished post and its schema deploy directly to your connected site or CMS. The work never leaves Tolstoy, and nothing is published until you say so.",
+                },
+              ].map((f) => (
+                <div
+                  key={f.id}
+                  className="group relative bg-[#050505] p-8 md:p-12 hover:bg-[#0a0a0a] transition-colors duration-500"
+                >
+                  <div className="flex items-center gap-3 mb-8">
+                    <span className="w-1.5 h-1.5 bg-white/20 group-hover:bg-[#d4620a] transition-colors duration-500" />
+                    <span className="font-mono text-[10px] text-white/40 uppercase tracking-[0.2em]">
+                      {f.id}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold tracking-tighter text-white mb-4">
+                    {f.title}
+                  </h3>
+                  <p className="text-sm md:text-base text-white/40 leading-relaxed font-light">
+                    {f.desc}
+                  </p>
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-[#d4620a] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Trust: cost control + security */}
         <section
           aria-label="Cost control and security"
@@ -477,12 +533,9 @@ export default function ProductsPage() {
               Tolstoy is rolling out,{" "}
               <span className="text-white/30">invite-only.</span>
             </h2>
-            <a
-              href={WAITLIST}
-              className="bg-white text-[#050505] text-base md:text-lg font-bold px-10 py-5 hover:bg-[#d4620a] hover:text-white transition-colors text-center shrink-0"
-            >
-              Get early access &rarr;
-            </a>
+            <div className="shrink-0">
+              <EarlyAccessForm label="Get early access" />
+            </div>
           </div>
           <p className="max-w-[1400px] mx-auto mt-8 text-sm text-white/40 font-light">
             Want done-for-you content and AI Presence instead?{" "}
