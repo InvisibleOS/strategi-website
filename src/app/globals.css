@@ -190,29 +190,84 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-/* CMS GEO blocks — FAQ, Stat, Definition */
-.blog-prose [data-type="faq"] {
-  background: rgba(59, 130, 246, 0.05);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  margin: 2rem 0;
-}
-
-.blog-prose [data-type="stat"] {
-  background: rgba(245, 158, 11, 0.05);
-  border: 1px solid rgba(245, 158, 11, 0.1);
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  margin: 2rem 0;
-}
-
+/* CMS GEO blocks — FAQ, Stat, Definition.
+   On-brand dark callouts (near-black surface + a thin accent rail) so they
+   read as part of the Strategi theme instead of stock blue/amber/green boxes. */
+.blog-prose [data-type="faq"],
+.blog-prose [data-type="stat"],
 .blog-prose [data-type="definition"] {
-  background: rgba(34, 197, 94, 0.05);
-  border: 1px solid rgba(34, 197, 94, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 2px solid #d4620a;
   border-radius: 0.5rem;
-  padding: 1.5rem;
-  margin: 2rem 0;
+  padding: 1.5rem 1.75rem;
+  margin: 2.5rem 0;
+}
+
+/* Eyebrow label above each block, matching the orange mono labels used
+   elsewhere on the site. */
+.blog-prose [data-type="faq"]::before,
+.blog-prose [data-type="stat"]::before,
+.blog-prose [data-type="definition"]::before {
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #d4620a;
+  margin-bottom: 1rem;
+}
+.blog-prose [data-type="faq"]::before {
+  content: "FAQ";
+}
+.blog-prose [data-type="stat"]::before {
+  content: "By the numbers";
+  border-left-color: #d4620a;
+}
+.blog-prose [data-type="definition"]::before {
+  content: "Definition";
+}
+
+/* Questions / terms inside an FAQ block — render as clear, tight headings
+   whether the CMS emits h3/h4, a <dt>, or a <summary>. */
+.blog-prose [data-type="faq"] h3,
+.blog-prose [data-type="faq"] h4,
+.blog-prose [data-type="faq"] dt,
+.blog-prose [data-type="faq"] summary {
+  color: #ededed;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  cursor: default;
+}
+
+/* Answers / definitions — muted body text, no inherited list indent. */
+.blog-prose [data-type="faq"] p,
+.blog-prose [data-type="faq"] dd,
+.blog-prose [data-type="stat"] p,
+.blog-prose [data-type="definition"] p {
+  color: rgba(237, 237, 237, 0.6);
+  margin: 0 0 0.75rem 0;
+}
+.blog-prose [data-type="faq"] dd {
+  margin-left: 0;
+}
+
+/* No top gap on the first question (it sits right under the eyebrow) and no
+   trailing gap on the last answer. */
+.blog-prose [data-type="faq"] > :first-child,
+.blog-prose [data-type="faq"] dl > dt:first-child,
+.blog-prose [data-type="faq"] h3:first-of-type,
+.blog-prose [data-type="faq"] h4:first-of-type {
+  margin-top: 0;
+}
+.blog-prose [data-type="faq"] > :last-child,
+.blog-prose [data-type="stat"] > :last-child,
+.blog-prose [data-type="definition"] > :last-child {
+  margin-bottom: 0;
 }
 
 /* Line clamp utility */

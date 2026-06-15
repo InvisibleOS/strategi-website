@@ -318,31 +318,30 @@ export default async function BlogPostPage({
               )}
             </nav>
 
-            {/* Meta line */}
-            <div className="flex flex-wrap items-center gap-3 mb-6">
+            {/* Meta line — each segment keeps its separator attached and
+                non-breaking, so the row wraps cleanly between segments instead
+                of orphaning a slash or splitting the date mid-text */}
+            <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 mb-6 text-[10px] font-mono uppercase tracking-widest text-white/50">
               {post.category && (
-                <>
-                  <Link
-                    href={`/blogs?category=${post.category.slug}`}
-                    className="text-[10px] font-mono uppercase tracking-widest text-[#d4620a] hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4620a] rounded"
-                  >
-                    {post.category.name}
-                  </Link>
-                  <span aria-hidden="true" className="text-[10px] font-mono text-white/30">
+                <Link
+                  href={`/blogs?category=${post.category.slug}`}
+                  className="text-[#d4620a] hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4620a] rounded"
+                >
+                  {post.category.name}
+                </Link>
+              )}
+              <span className="inline-flex items-center gap-2.5 whitespace-nowrap">
+                {post.category && (
+                  <span aria-hidden="true" className="text-white/30">
                     /
                   </span>
-                </>
-              )}
-              <time
-                dateTime={post.published_at}
-                className="text-[10px] font-mono uppercase tracking-widest text-white/50"
-              >
-                {publishedDate}
-              </time>
-              <span aria-hidden="true" className="text-[10px] font-mono text-white/30">
-                /
+                )}
+                <time dateTime={post.published_at}>{publishedDate}</time>
               </span>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-white/50">
+              <span className="inline-flex items-center gap-2.5 whitespace-nowrap">
+                <span aria-hidden="true" className="text-white/30">
+                  /
+                </span>
                 {readingTime} min read
               </span>
             </div>
