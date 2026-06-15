@@ -42,6 +42,15 @@ export interface RelatedPost {
   category: { name: string; slug: string } | null;
 }
 
+export interface Citation {
+  number: number;
+  url: string;
+  title: string | null;
+  publisher: string | null;
+  date: string | null;
+  quote: string | null;
+}
+
 export interface Post {
   title: string;
   slug: string;
@@ -49,10 +58,20 @@ export interface Post {
   body_html: string | null;
   published_at: string;
   updated_at: string;
-  author: { name: string; bio: string; avatar_url: string } | null;
+  // Authoritative reading time from the CMS. Prefer this over counting words
+  // in body_html — that markup includes the auto-injected byline, FAQ JSON,
+  // and Sources section, which inflate a local estimate.
+  reading_time_minutes: number | null;
+  author: {
+    name: string;
+    bio: string | null;
+    avatar_url: string | null;
+    url: string | null;
+  } | null;
   category: { name: string; slug: string } | null;
   tags: Array<{ name: string; slug: string }>;
   featured_image: FeaturedImage | null;
+  citations?: Citation[];
   meta: {
     title: string;
     description: string;

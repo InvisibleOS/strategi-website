@@ -235,7 +235,10 @@ export default async function BlogPostPage({
   const post: Post | null = await getBlogPost(slug);
   if (!post) notFound();
 
-  const readingTime = getReadingTime(post.body_html);
+  // Prefer the CMS's authoritative value; fall back to a local estimate only
+  // if the field is missing.
+  const readingTime =
+    post.reading_time_minutes ?? getReadingTime(post.body_html);
   const publishedDate = new Date(post.published_at).toLocaleDateString(
     "en-US",
     { year: "numeric", month: "long", day: "numeric" }
