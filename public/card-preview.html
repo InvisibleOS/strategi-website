@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Card preview</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; padding: 56px 40px;
+    background: #e9eaee;
+    display: flex; gap: 40px; align-items: flex-start; justify-content: center;
+    font-family: system-ui, sans-serif;
+  }
+  .card {
+    position: relative; width: 600px; aspect-ratio: 9 / 8; overflow: hidden;
+    border-radius: 1.5rem; border: 1px solid rgba(255,255,255,.15); background: #0a0a0a;
+    box-shadow: 0 30px 80px -30px rgba(0,0,0,.85);
+    transition: border-color .3s;
+  }
+  /* full image, top-aligned (height = 9/8 of width); card clips it at the square's bottom */
+  .stage { position: absolute; left: 0; right: 0; top: 0; aspect-ratio: 8 / 9; pointer-events: none; }
+  .stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .7s ease; }
+  .blur { position: absolute; inset: 0; }
+  .blur > div { position: absolute; inset: 0; }
+  /* progressive blur: 810/2160 (37.5%) -> max md(12px) by 1620/2160 (75%), constant after */
+  .b1 { backdrop-filter: blur(2px);  -webkit-backdrop-filter: blur(2px);
+        mask-image: linear-gradient(to bottom, transparent 37.5%, #000 47%);  -webkit-mask-image: linear-gradient(to bottom, transparent 37.5%, #000 47%); }
+  .b2 { backdrop-filter: blur(4px);  -webkit-backdrop-filter: blur(4px);
+        mask-image: linear-gradient(to bottom, transparent 44%, #000 54%);  -webkit-mask-image: linear-gradient(to bottom, transparent 44%, #000 54%); }
+  .b3 { backdrop-filter: blur(6px);  -webkit-backdrop-filter: blur(6px);
+        mask-image: linear-gradient(to bottom, transparent 51%, #000 60%);  -webkit-mask-image: linear-gradient(to bottom, transparent 51%, #000 60%); }
+  .b4 { backdrop-filter: blur(9px);  -webkit-backdrop-filter: blur(9px);
+        mask-image: linear-gradient(to bottom, transparent 58%, #000 67%);  -webkit-mask-image: linear-gradient(to bottom, transparent 58%, #000 67%); }
+  .b5 { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        mask-image: linear-gradient(to bottom, transparent 65%, #000 75%);  -webkit-mask-image: linear-gradient(to bottom, transparent 65%, #000 75%); }
+  /* colour wash: black/0 at 810px (37.5%) -> black/80 at 1620px (75%), then constant black/80 */
+  .wash { position: absolute; inset: 0;
+          background: linear-gradient(to bottom, rgba(0,0,0,0) 37.5%, rgba(0,0,0,.8) 75%); }
+  /* hover: black/10 over the whole image + border -> white/20 (3rd card forced for the screenshot) */
+  .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0); transition: background .4s; }
+  .card:hover, .card.is-hover { border-color: rgba(255,255,255,.5); }
+  .card:hover .overlay, .card.is-hover .overlay { background: rgba(0,0,0,.1); }
+  .card:hover .stage img, .card.is-hover .stage img { transform: scale(1.02); }
+  .heart {
+    position: absolute; top: 18px; right: 18px; width: 42px; height: 42px;
+    border-radius: 9999px; background: rgba(255,255,255,.15);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center; z-index: 10;
+  }
+  .heart svg { width: 21px; height: 21px; stroke: #fff; fill: none; stroke-width: 1.75; }
+  /* content over the blurred + darkened lower image; title starts at 1080px (56.25% of the square) */
+  .content { position: absolute; left: 0; right: 0; top: 56.25%; bottom: 0;
+             display: flex; flex-direction: column; justify-content: flex-end; padding: 0 28px 28px; }
+  .content h2 {
+    margin: 0; color: #fff; font-size: 24px; font-weight: 700;
+    line-height: 1.15; letter-spacing: -0.01em;
+  }
+  .content p { margin: 12px 0 0; color: rgba(255,255,255,.7); font-size: 15px; line-height: 1.5; }
+  /* read more — white/black, card radius, turns orange/white on hover */
+  .btn {
+    display: flex; width: 100%; height: 48px; align-items: center; justify-content: center;
+    margin-top: 20px; padding: 0 20px; border-radius: 9999px;
+    background: #fff; color: #0a0a0a; font-size: 14px; font-weight: 600;
+    transition: background .3s, color .3s;
+  }
+  .card:hover .btn, .card.is-hover .btn { background: #d4620a; color: #fff; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="stage">
+      <img src="/blog-covers/1.png" />
+      <div class="blur"><div class="b1"></div><div class="b2"></div><div class="b3"></div><div class="b4"></div><div class="b5"></div></div>
+      <div class="wash"></div>
+      <div class="overlay"></div>
+    </div>
+    <div class="heart"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+    <div class="content">
+      <h2>GEO, AEO, AIO, LLMO: A Field Guide to the Terms</h2>
+      <p>Four names for one shift from ranking to being the AI answer. A plain field guide to what differs.</p>
+      <div class="btn">Read more</div>
+    </div>
+  </div>
+
+  <div class="card is-hover">
+    <div class="stage">
+      <img src="/blog-covers/3.png" />
+      <div class="blur"><div class="b1"></div><div class="b2"></div><div class="b3"></div><div class="b4"></div><div class="b5"></div></div>
+      <div class="wash"></div>
+      <div class="overlay"></div>
+    </div>
+    <div class="heart"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+    <div class="content">
+      <h2>The Recommendation Economy, Defined</h2>
+      <p>How AI systems decide which companies get recommended to buyers, and why trust beats ad budgets.</p>
+      <div class="btn">Read more</div>
+    </div>
+  </div>
+</body>
+</html>
