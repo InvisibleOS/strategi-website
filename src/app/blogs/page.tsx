@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getBlogPosts, getCategories, getTags } from "@/lib/cms";
 import type { Metadata } from "next";
 import type { Post, Category, Tag } from "@/lib/cms";
+import { Heart } from "lucide-react";
 
 const SITE_URL = "https://strategi.is";
 const OG_IMAGE = `${SITE_URL}/strategi.png`;
@@ -131,125 +132,102 @@ function BlogJsonLd({
 
 function PostCard({
   post,
-  featured,
   priority,
 }: {
   post: Post;
-  featured?: boolean;
   priority?: boolean;
 }) {
-  const date = new Date(post.published_at).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-
   const img = post.featured_image;
-  // Pre-built variants from the CMS: url_card (1200x630) for featured hero,
-  // url_thumbnail (400x400) for regular cards.
-  const imgSrc = img ? (featured ? img.url_card : img.url_thumbnail) : null;
+  const imgSrc = img?.url_wide || img?.url_card || null;
+
+  // Geometry: the source image is 2160px tall. The image WINDOW shows the top 1620px (3/4)
+  // — the "stage" inside it is the full image length (4/3 of the window = 133.333%),
+  // top-aligned. With a 1920px-wide image the window is 1920x1620 = 32:27. The card then
+  // EXTENDS below the window (flex-col) to hold the description, date and author.
+  //
+  // Progressive ("gradient") blur over 810/2160 (37.5%) → 1620/2160 (75%): stacked
+  // backdrop-blur layers of increasing radius, maxing at 12px (≈ backdrop-blur-md) by
+  // 1620px and not increasing past it. A matching colour wash runs over the same span:
+  // black/0 at 810px → black/80 at 1620px (and stays black/80 below).
+  const blurLayers = [
+    { blur: 2, from: "37.5%", to: "47%" },
+    { blur: 4, from: "44%", to: "54%" },
+    { blur: 6, from: "51%", to: "60%" },
+    { blur: 9, from: "58%", to: "67%" },
+    { blur: 12, from: "65%", to: "75%" },
+  ];
 
   return (
-    <article
-      className={`group relative flex flex-col bg-white/[0.02] border border-white/[0.06] rounded-lg overflow-hidden hover:border-white/20 focus-within:border-[#d4620a]/60 transition-colors duration-500 motion-reduce:transition-none ${
-        featured ? "md:col-span-2 md:row-span-2" : ""
-      }`}
-    >
+    <article className="relative aspect-[9/8] overflow-hidden rounded-3xl border border-white/15 bg-[#0a0a0a] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.85)] transition-colors duration-300 hover:border-white/50">
       <Link
         href={`/blogs/${post.slug}`}
-        className="flex flex-col h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4620a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505] rounded-lg"
+        className="group relative block h-full w-full rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4620a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
       >
-        {imgSrc ? (
-          <div
-            className={`relative overflow-hidden ${
-              featured ? "aspect-[16/9]" : "aspect-[16/10]"
-            }`}
-          >
+        {/* Full image, top-aligned (height = 9/8 of the card width). The card is sized by its
+            content and clips the image at the bottom, so the image fills the whole card and
+            the part below 1620px stays at max (md) blur + black/50 — never solid black. */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 aspect-[8/9]">
+          {imgSrc ? (
             <img
               src={imgSrc}
               alt={img?.alt || post.title}
-              width={featured ? 1200 : 400}
-              height={featured ? 630 : 400}
               loading={priority ? "eager" : "lazy"}
               decoding={priority ? "sync" : "async"}
               fetchPriority={priority ? "high" : "auto"}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transform-none motion-reduce:transition-none"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none"
             />
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-t from-[#050505]/60 via-transparent to-transparent"
-            />
-          </div>
-        ) : (
-          <div
-            aria-hidden="true"
-            className={`relative ${
-              featured ? "aspect-[16/9]" : "aspect-[16/10]"
-            } bg-gradient-to-br from-[#d4620a]/10 via-[#050505] to-[#050505] flex items-center justify-center`}
-          >
-            <span className="text-[#d4620a]/20 text-6xl font-bold tracking-tighter select-none">
-              S
-            </span>
-          </div>
-        )}
+          ) : (
+            <div className="absolute inset-0 bg-linear-to-br from-[#d4620a]/20 via-[#0a0a0a] to-[#0a0a0a]" />
+          )}
 
-        <div className="flex flex-col flex-1 p-5 md:p-6">
-          <div className="flex items-center gap-3 mb-4">
-            {post.category && (
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#d4620a]">
-                {post.category.name}
-              </span>
-            )}
-            <span aria-hidden="true" className="text-[10px] font-mono text-white/30">
-              /
-            </span>
-            <time
-              dateTime={post.published_at}
-              className="text-[10px] font-mono uppercase tracking-widest text-white/50"
-            >
-              {date}
-            </time>
+          {/* Progressive blur — starts 810px (37.5%), max md by 1620px (75%), constant after */}
+          <div className="absolute inset-0">
+            {blurLayers.map((l) => (
+              <div
+                key={l.blur}
+                className="absolute inset-0"
+                style={{
+                  backdropFilter: `blur(${l.blur}px)`,
+                  WebkitBackdropFilter: `blur(${l.blur}px)`,
+                  maskImage: `linear-gradient(to bottom, transparent ${l.from}, #000 ${l.to})`,
+                  WebkitMaskImage: `linear-gradient(to bottom, transparent ${l.from}, #000 ${l.to})`,
+                }}
+              />
+            ))}
           </div>
 
-          <h2
-            className={`font-bold tracking-tight leading-tight text-white group-hover:text-[#d4620a] transition-colors duration-300 motion-reduce:transition-none mb-3 ${
-              featured ? "text-2xl md:text-3xl" : "text-lg md:text-xl"
-            }`}
-          >
+          {/* Colour wash: black/0 at 810px (37.5%) → black/80 at 1620px (75%), then constant black/80 */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0)_37.5%,rgba(0,0,0,0.8)_75%)]" />
+
+          {/* Hover: black/10 overlay across the whole image */}
+          <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10 motion-reduce:transition-none" />
+        </div>
+
+        {/* Favourite (decorative) */}
+        <span
+          aria-hidden="true"
+          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 backdrop-blur-md"
+        >
+          <Heart className="h-5 w-5 text-white" strokeWidth={1.75} />
+        </span>
+
+        {/* Content fills from 1080px (50% of the image = 56.25% of the card) to the bottom.
+            justify-end keeps the title + description close to the button (any extra space goes
+            above the title); the button is fully round and pinned to the bottom. */}
+        <div className="absolute inset-x-0 top-[56.25%] bottom-0 flex flex-col justify-end px-7 pb-7">
+          <h2 className="text-xl font-bold leading-tight tracking-tight text-white line-clamp-2 md:text-2xl">
             {post.title}
           </h2>
-
           {post.excerpt && (
-            <p className="text-sm text-white/60 font-light leading-relaxed line-clamp-2 mb-4">
+            <p className="mt-3 text-sm leading-relaxed text-white/70 line-clamp-2">
               {post.excerpt}
             </p>
           )}
-
-          <div className="mt-auto flex items-center justify-between pt-4 border-t border-white/[0.06]">
-            {post.author ? (
-              <div className="flex items-center gap-2">
-                {post.author.avatar_url && (
-                  <img
-                    src={post.author.avatar_url}
-                    alt=""
-                    width={20}
-                    height={20}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-5 h-5 rounded-full object-cover"
-                  />
-                )}
-                <span className="text-xs text-white/60 font-light">
-                  {post.author.name}
-                </span>
-              </div>
-            ) : (
-              <span />
-            )}
-            <span className="text-[10px] font-mono uppercase tracking-widest text-white/50 group-hover:text-[#d4620a] transition-colors">
-              Read&nbsp;&rarr;
-            </span>
-          </div>
+          {/* Read more — fully round (h-12 → 24px radius, matching the card's rounded-3xl);
+              white w/ black text, turns orange w/ white on card hover. The whole card is the link. */}
+          <span className="mt-5 flex h-12 w-full items-center justify-center rounded-full bg-white px-5 text-sm font-semibold text-[#0a0a0a] transition-colors duration-300 group-hover:bg-[#d4620a] group-hover:text-white motion-reduce:transition-none">
+            Read more
+          </span>
         </div>
       </Link>
     </article>
@@ -400,14 +378,9 @@ export default async function BlogListPage({
           <ActiveTagBanner tag={activeTag} />
 
           {posts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-10">
               {posts.map((post, i) => (
-                <PostCard
-                  key={post.slug}
-                  post={post}
-                  featured={i === 0}
-                  priority={i === 0}
-                />
+                <PostCard key={post.slug} post={post} priority={i < 2} />
               ))}
             </div>
           ) : (

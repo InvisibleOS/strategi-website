@@ -402,7 +402,8 @@ export default async function BlogPostPage({
           {/* Featured image */}
           {post.featured_image ? (
             <figure className="max-w-[1400px] mx-auto px-6 md:px-12 mb-12 md:mb-16">
-              <div className="relative rounded-lg overflow-hidden">
+              {/* Show only the first 1080px (top half) of the 2160px-tall image */}
+              <div className="relative aspect-video overflow-hidden rounded-lg">
                 <picture>
                   <source
                     media="(max-width: 768px)"
@@ -411,12 +412,12 @@ export default async function BlogPostPage({
                   <img
                     src={post.featured_image.url_wide}
                     alt={post.featured_image.alt || post.title}
-                    width={1600}
-                    height={900}
+                    width={1920}
+                    height={2160}
                     loading="eager"
                     decoding="sync"
                     fetchPriority="high"
-                    className="w-full h-auto rounded-lg"
+                    className="absolute inset-0 h-full w-full object-cover object-top"
                   />
                 </picture>
               </div>
