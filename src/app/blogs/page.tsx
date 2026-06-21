@@ -149,13 +149,7 @@ function PostCard({
   // backdrop-blur layers of increasing radius, maxing at 12px (≈ backdrop-blur-md) by
   // 1620px and not increasing past it. A matching colour wash runs over the same span:
   // black/0 at 810px → black/80 at 1620px (and stays black/80 below).
-  const blurLayers = [
-    { blur: 2, from: "37.5%", to: "47%" },
-    { blur: 4, from: "44%", to: "54%" },
-    { blur: 6, from: "51%", to: "60%" },
-    { blur: 9, from: "58%", to: "67%" },
-    { blur: 12, from: "65%", to: "75%" },
-  ];
+
 
   return (
     <article className="relative aspect-[9/8] overflow-hidden rounded-3xl border border-white/15 bg-[#0a0a0a] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.85)] transition-colors duration-300 hover:border-white/50">
@@ -180,21 +174,7 @@ function PostCard({
             <div className="absolute inset-0 bg-linear-to-br from-[#d4620a]/20 via-[#0a0a0a] to-[#0a0a0a]" />
           )}
 
-          {/* Progressive blur — starts 810px (37.5%), max md by 1620px (75%), constant after */}
-          <div className="absolute inset-0">
-            {blurLayers.map((l) => (
-              <div
-                key={l.blur}
-                className="absolute inset-0"
-                style={{
-                  backdropFilter: `blur(${l.blur}px)`,
-                  WebkitBackdropFilter: `blur(${l.blur}px)`,
-                  maskImage: `linear-gradient(to bottom, transparent ${l.from}, #000 ${l.to})`,
-                  WebkitMaskImage: `linear-gradient(to bottom, transparent ${l.from}, #000 ${l.to})`,
-                }}
-              />
-            ))}
-          </div>
+
 
           {/* Colour wash: black/0 at 810px (37.5%) → black/80 at 1620px (75%), then constant black/80 */}
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0)_37.5%,rgba(0,0,0,0.8)_75%)]" />
@@ -206,7 +186,7 @@ function PostCard({
         {/* Favourite (decorative) */}
         <span
           aria-hidden="true"
-          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 backdrop-blur-md"
+          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/20"
         >
           <Heart className="h-5 w-5 text-white" strokeWidth={1.75} />
         </span>

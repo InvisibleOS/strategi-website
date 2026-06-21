@@ -83,7 +83,7 @@ export default function EarlyAccessForm({
 
       {open && (
         <div
-          className="fixed inset-0 z-[90] flex items-end sm:items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-sm"
+          className="fixed inset-0 z-[90] flex items-end sm:items-center justify-center p-4 sm:p-6 bg-black/70"
           role="dialog"
           aria-modal="true"
           aria-label="Request early access to Tolstoy"

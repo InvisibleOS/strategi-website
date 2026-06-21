@@ -6,6 +6,9 @@ import { usePathname } from "next/navigation";
 import { X, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useLenis } from "lenis/react";
+import { cn } from "@/lib/utils";
+import GlassSurface from "./GlassSurface";
 
 const navLinks = [
   { label: "Services", href: "/services", num: "01" },
@@ -18,7 +21,16 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
+  const lenis = useLenis();
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      setIsMounted(true);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   useEffect(() => {
     let raf = 0;
@@ -36,13 +48,20 @@ export default function Navbar() {
     };
   }, []);
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
+      lenis?.stop();
     } else {
       document.body.style.overflow = "";
+      lenis?.start();
     }
-  }, [open]);
+    return () => {
+      document.body.style.overflow = "";
+      lenis?.start();
+    };
+  }, [open, lenis]);
 
   useEffect(() => {
     const close = () => setOpen(false);
@@ -57,7 +76,11 @@ export default function Navbar() {
 
       if (href === "/") {
         if (pathname === "/") {
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          if (lenis) {
+            lenis.scrollTo(0);
+          } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
         } else {
           window.location.href = "/";
         }
@@ -68,7 +91,13 @@ export default function Navbar() {
         const hash = href.slice(1);
         if (pathname === "/") {
           const el = document.querySelector(hash);
-          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (el) {
+            if (lenis) {
+              lenis.scrollTo(el as HTMLElement);
+            } else {
+              el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }
         } else {
           window.location.href = href;
         }
@@ -76,33 +105,35 @@ export default function Navbar() {
         window.location.href = href;
       }
     },
-    [pathname]
+    [pathname, lenis]
   );
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-300 w-full ${
-          scrolled ? "pt-4" : "pt-6"
-        }`}
+      <header
+        className={cn(
+          "fixed top-4 inset-x-0 z-50",
+          "transition-all duration-500 ease-in-out",
+          isMounted ? "translate-y-0 opacity-100" : "-translate-y-[150%] opacity-0",
+          scrolled ? "mx-4 md:mx-32 lg:mx-64" : "mx-4 md:mx-8 lg:mx-12",
+          "flex justify-center"
+        )}
       >
-        <div
-          className={`relative flex items-center justify-between transition-all duration-500 ease-out
-          ${
+        <GlassSurface
+          enabled={scrolled}
+          className={cn(
+            "relative flex items-center justify-between",
+            "rounded-full px-5 py-3 md:py-4 transition-all duration-500 ease-in-out w-full",
             scrolled
-              ? "bg-[#050505]/80 border-white/10 shadow-2xl shadow-black/50 md:max-w-[980px]"
-              : "bg-transparent border-transparent md:max-w-[1200px]"
-          }
-          w-[calc(100%-2rem)]
-          backdrop-blur-xl border rounded-full px-5 py-3 md:py-4`}
+              ? "shadow-2xl shadow-black/50 border border-white/10"
+              : "shadow-none border border-transparent bg-transparent"
+          )}
         >
+          {/* Left — Logo */}
           <Link
             href="/"
             onClick={(e) => handleNav(e, "/")}
-            className="flex items-center gap-2 z-50 relative group shrink-0"
+            className="flex items-center gap-2 z-50 relative group shrink-0 hover:opacity-80 transition-opacity"
           >
             <Image
               src="/strategi.png"
@@ -112,19 +143,25 @@ export default function Navbar() {
               priority
               className="rounded-full object-cover"
             />
-            <span className="text-xl font-bold tracking-tighter text-white">
+            <span
+              className={cn(
+                "text-xl font-bold tracking-tighter transition-colors duration-500 ease-in-out",
+                scrolled ? "text-white/90" : "text-[#d4620a]"
+              )}
+            >
               Strategi
             </span>
           </Link>
 
+          {/* Desktop Nav links + CTA */}
           <nav className="hidden md:flex items-center gap-1 ml-auto" aria-label="Main navigation">
-            <div className="flex items-center bg-white/[0.03] border border-white/5 rounded-full px-2 py-1.5 mr-4">
+            <div className="flex items-center rounded-full p-1.5 mr-4">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleNav(e, link.href)}
-                  className="relative px-4 lg:px-5 py-2 text-sm font-medium text-gray-400 hover:text-white transition-colors rounded-full hover:bg-white/5"
+                  className="relative px-4 lg:px-5 py-2 text-sm font-medium text-white/75 hover:text-white transition-colors rounded-full hover:bg-white/10"
                 >
                   {link.label}
                 </a>
@@ -134,25 +171,24 @@ export default function Navbar() {
             <Link
               href="/#contact"
               onClick={(e) => handleNav(e, "/#contact")}
-              className="group relative inline-flex items-center justify-center px-6 lg:px-8 py-3 lg:py-3.5 overflow-hidden font-medium text-black transition duration-300 ease-out rounded-full shadow-md"
+              className="group relative inline-flex items-center justify-center px-6 lg:px-8 py-3 lg:py-3.5 font-bold text-black bg-white hover:bg-[#d4620a] hover:text-white transition-colors duration-300 rounded-full shadow-md shrink-0"
             >
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-white via-gray-200 to-gray-400" />
-              <span className="absolute top-0 right-0 block w-64 h-64 -mr-16 -mt-16 bg-white opacity-20 transform rotate-45 translate-x-full group-hover:translate-x-0 transition-all duration-700 ease-in-out" />
               <span className="relative flex items-center gap-2 text-sm font-bold tracking-widest uppercase">
                 Book a Call
               </span>
             </Link>
           </nav>
 
+          {/* Mobile hamburger */}
           <button
             onClick={() => setOpen(true)}
             aria-label="Open navigation menu"
-            className="md:hidden relative z-50 p-2 text-white hover:text-[#d4620a] transition-colors"
+            className="md:hidden relative z-50 p-2 text-white hover:text-[#d4620a] transition-colors cursor-pointer"
           >
             <Menu size={28} strokeWidth={1.5} />
           </button>
-        </div>
-      </motion.header>
+        </GlassSurface>
+      </header>
 
       <AnimatePresence>
         {open && (
@@ -161,7 +197,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[60] bg-[#050505]/95 backdrop-blur-2xl overflow-y-auto overscroll-none"
+            className="fixed inset-0 z-[60] bg-[#050505] overflow-y-auto overscroll-none"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
@@ -169,7 +205,7 @@ export default function Navbar() {
             <button
               onClick={() => setOpen(false)}
               aria-label="Close navigation menu"
-              className="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition-colors z-10"
+              className="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition-colors z-10 cursor-pointer"
             >
               <X size={28} strokeWidth={1} />
             </button>
