@@ -17,9 +17,6 @@ interface GlassSurfaceProps {
   backgroundOpacity?: number;
   saturation?: number;
   distortionScale?: number;
-  redOffset?: number;
-  greenOffset?: number;
-  blueOffset?: number;
   xChannel?: 'R' | 'G' | 'B';
   yChannel?: 'R' | 'G' | 'B';
   mixBlendMode?: 'difference' | 'screen' | string;
@@ -40,10 +37,7 @@ const GlassSurface = ({
   displace = 2.5,
   backgroundOpacity = 0.5,
   saturation = 1,
-  distortionScale = -180,
-  redOffset = 0,
-  greenOffset = 0,
-  blueOffset = 0,
+  distortionScale = -100,
   xChannel = 'R',
   yChannel = 'G',
   mixBlendMode = 'difference',
@@ -60,9 +54,7 @@ const GlassSurface = ({
 
   const containerRef = useRef<HTMLDivElement>(null);
   const feImageRef = useRef<SVGFEImageElement>(null);
-  const redChannelRef = useRef<SVGFEDisplacementMapElement>(null);
-  const greenChannelRef = useRef<SVGFEDisplacementMapElement>(null);
-  const blueChannelRef = useRef<SVGFEDisplacementMapElement>(null);
+  const displacementMapRef = useRef<SVGFEDisplacementMapElement>(null);
   const gaussianBlurRef = useRef<SVGFEGaussianBlurElement>(null);
 
   const generateDisplacementMap = () => {
@@ -105,17 +97,11 @@ const GlassSurface = ({
     
     updateDisplacementMap();
 
-    [
-      { ref: redChannelRef, offset: redOffset },
-      { ref: greenChannelRef, offset: greenOffset },
-      { ref: blueChannelRef, offset: blueOffset }
-    ].forEach(({ ref, offset }) => {
-      if (ref.current) {
-        ref.current.setAttribute('scale', (distortionScale + offset).toString());
-        ref.current.setAttribute('xChannelSelector', xChannel);
-        ref.current.setAttribute('yChannelSelector', yChannel);
-      }
-    });
+    if (displacementMapRef.current) {
+      displacementMapRef.current.setAttribute('scale', distortionScale.toString());
+      displacementMapRef.current.setAttribute('xChannelSelector', xChannel);
+      displacementMapRef.current.setAttribute('yChannelSelector', yChannel);
+    }
 
     gaussianBlurRef.current?.setAttribute('stdDeviation', displace.toString());
   }, [
@@ -127,9 +113,6 @@ const GlassSurface = ({
     blur,
     displace,
     distortionScale,
-    redOffset,
-    greenOffset,
-    blueOffset,
     xChannel,
     yChannel,
     mixBlendMode
@@ -196,8 +179,6 @@ const GlassSurface = ({
     ? (svgSupported ? 'glass-surface--svg' : 'glass-surface--fallback')
     : '';
 
-  const hasAberration = redOffset !== 0 || greenOffset !== 0 || blueOffset !== 0;
-
   return (
     <div
       ref={containerRef}
@@ -210,53 +191,7 @@ const GlassSurface = ({
             <filter id={filterId} colorInterpolationFilters="sRGB" x="0%" y="0%" width="100%" height="100%">
               <feImage ref={feImageRef} x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map" />
 
-              {hasAberration ? (
-                <>
-                  <feDisplacementMap ref={redChannelRef} in="SourceGraphic" in2="map" id="redchannel" result="dispRed" />
-                  <feColorMatrix
-                    in="dispRed"
-                    type="matrix"
-                    values="1 0 0 0 0
-                            0 0 0 0 0
-                            0 0 0 0 0
-                            0 0 0 1 0"
-                    result="red"
-                  />
-
-                  <feDisplacementMap
-                    ref={greenChannelRef}
-                    in="SourceGraphic"
-                    in2="map"
-                    id="greenchannel"
-                    result="dispGreen"
-                  />
-                  <feColorMatrix
-                    in="dispGreen"
-                    type="matrix"
-                    values="0 0 0 0 0
-                            0 1 0 0 0
-                            0 0 0 0 0
-                            0 0 0 1 0"
-                    result="green"
-                  />
-
-                  <feDisplacementMap ref={blueChannelRef} in="SourceGraphic" in2="map" id="bluechannel" result="dispBlue" />
-                  <feColorMatrix
-                    in="dispBlue"
-                    type="matrix"
-                    values="0 0 0 0 0
-                            0 0 0 0 0
-                            0 0 1 0 0
-                            0 0 0 1 0"
-                    result="blue"
-                  />
-
-                  <feBlend in="red" in2="green" mode="screen" result="rg" />
-                  <feBlend in="rg" in2="blue" mode="screen" result="output" />
-                </>
-              ) : (
-                <feDisplacementMap ref={redChannelRef} in="SourceGraphic" in2="map" id="redchannel" result="output" />
-              )}
+              <feDisplacementMap ref={displacementMapRef} in="SourceGraphic" in2="map" id="displacement" result="output" />
 
               <feGaussianBlur ref={gaussianBlurRef} in="output" stdDeviation="0.7" />
             </filter>
