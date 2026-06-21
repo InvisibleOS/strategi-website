@@ -94,12 +94,17 @@ const GlassSurface = ({
   };
 
   const updateDisplacementMap = () => {
-    feImageRef.current?.setAttribute('href', generateDisplacementMap());
+    if (feImageRef.current) {
+      feImageRef.current.setAttribute('href', generateDisplacementMap());
+    }
   };
 
+  // Sync parameters to filter components
   useEffect(() => {
     if (!enabled) return;
+    
     updateDisplacementMap();
+
     [
       { ref: redChannelRef, offset: redOffset },
       { ref: greenChannelRef, offset: greenOffset },
@@ -115,8 +120,6 @@ const GlassSurface = ({
     gaussianBlurRef.current?.setAttribute('stdDeviation', displace.toString());
   }, [
     enabled,
-    width,
-    height,
     borderRadius,
     borderWidth,
     brightness,
@@ -132,24 +135,27 @@ const GlassSurface = ({
     mixBlendMode
   ]);
 
+  // Consolidated and debounced Resize Observer
   useEffect(() => {
     if (!enabled || !containerRef.current) return;
 
+    let timeoutId: NodeJS.Timeout;
+
+    // Initial positioning
+    updateDisplacementMap();
+
     const resizeObserver = new ResizeObserver(() => {
-      setTimeout(updateDisplacementMap, 0);
+      // Debounce updates by 100ms to avoid re-rendering and layout thrashing during transitions
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(updateDisplacementMap, 100);
     });
 
     resizeObserver.observe(containerRef.current);
 
     return () => {
       resizeObserver.disconnect();
+      clearTimeout(timeoutId);
     };
-  }, [enabled]);
-
-  useEffect(() => {
-    if (enabled) {
-      setTimeout(updateDisplacementMap, 0);
-    }
   }, [enabled, width, height]);
 
   useEffect(() => {
@@ -190,6 +196,8 @@ const GlassSurface = ({
     ? (svgSupported ? 'glass-surface--svg' : 'glass-surface--fallback')
     : '';
 
+  const hasAberration = redOffset !== 0 || greenOffset !== 0 || blueOffset !== 0;
+
   return (
     <div
       ref={containerRef}
@@ -202,47 +210,54 @@ const GlassSurface = ({
             <filter id={filterId} colorInterpolationFilters="sRGB" x="0%" y="0%" width="100%" height="100%">
               <feImage ref={feImageRef} x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map" />
 
-              <feDisplacementMap ref={redChannelRef} in="SourceGraphic" in2="map" id="redchannel" result="dispRed" />
-              <feColorMatrix
-                in="dispRed"
-                type="matrix"
-                values="1 0 0 0 0
-                        0 0 0 0 0
-                        0 0 0 0 0
-                        0 0 0 1 0"
-                result="red"
-              />
+              {hasAberration ? (
+                <>
+                  <feDisplacementMap ref={redChannelRef} in="SourceGraphic" in2="map" id="redchannel" result="dispRed" />
+                  <feColorMatrix
+                    in="dispRed"
+                    type="matrix"
+                    values="1 0 0 0 0
+                            0 0 0 0 0
+                            0 0 0 0 0
+                            0 0 0 1 0"
+                    result="red"
+                  />
 
-              <feDisplacementMap
-                ref={greenChannelRef}
-                in="SourceGraphic"
-                in2="map"
-                id="greenchannel"
-                result="dispGreen"
-              />
-              <feColorMatrix
-                in="dispGreen"
-                type="matrix"
-                values="0 0 0 0 0
-                        0 1 0 0 0
-                        0 0 0 0 0
-                        0 0 0 1 0"
-                result="green"
-              />
+                  <feDisplacementMap
+                    ref={greenChannelRef}
+                    in="SourceGraphic"
+                    in2="map"
+                    id="greenchannel"
+                    result="dispGreen"
+                  />
+                  <feColorMatrix
+                    in="dispGreen"
+                    type="matrix"
+                    values="0 0 0 0 0
+                            0 1 0 0 0
+                            0 0 0 0 0
+                            0 0 0 1 0"
+                    result="green"
+                  />
 
-              <feDisplacementMap ref={blueChannelRef} in="SourceGraphic" in2="map" id="bluechannel" result="dispBlue" />
-              <feColorMatrix
-                in="dispBlue"
-                type="matrix"
-                values="0 0 0 0 0
-                        0 0 0 0 0
-                        0 0 1 0 0
-                        0 0 0 1 0"
-                result="blue"
-              />
+                  <feDisplacementMap ref={blueChannelRef} in="SourceGraphic" in2="map" id="bluechannel" result="dispBlue" />
+                  <feColorMatrix
+                    in="dispBlue"
+                    type="matrix"
+                    values="0 0 0 0 0
+                            0 0 0 0 0
+                            0 0 1 0 0
+                            0 0 0 1 0"
+                    result="blue"
+                  />
 
-              <feBlend in="red" in2="green" mode="screen" result="rg" />
-              <feBlend in="rg" in2="blue" mode="screen" result="output" />
+                  <feBlend in="red" in2="green" mode="screen" result="rg" />
+                  <feBlend in="rg" in2="blue" mode="screen" result="output" />
+                </>
+              ) : (
+                <feDisplacementMap ref={redChannelRef} in="SourceGraphic" in2="map" id="redchannel" result="output" />
+              )}
+
               <feGaussianBlur ref={gaussianBlurRef} in="output" stdDeviation="0.7" />
             </filter>
           </defs>
