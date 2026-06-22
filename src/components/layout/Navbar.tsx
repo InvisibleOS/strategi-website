@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef, useLayoutEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { X, Menu } from "lucide-react";
@@ -9,6 +9,10 @@ import Link from "next/link";
 import { useLenis } from "lenis/react";
 import { cn } from "@/lib/utils";
 import GlassSurface from "./GlassSurface";
+
+// useLayoutEffect on the client (measure before paint), useEffect on the server.
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 const navLinks = [
   { label: "Services", href: "/services", num: "01" },
@@ -22,8 +26,20 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  // Hamburger layout: on phones, or when the full nav can't fit even at mx-4.
+  const [compact, setCompact] = useState(false);
+  // Whether the full nav still fits while the bar is morphed in (large scrolled
+  // margins). If not, we keep the bar wide (mx-4) instead of narrowing it.
+  const [fitsAtMorph, setFitsAtMorph] = useState(true);
   const pathname = usePathname();
   const lenis = useLenis();
+
+  const headerRef = useRef<HTMLElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const fullNavRef = useRef<HTMLElement>(null);
+  const logoRef = useRef<HTMLAnchorElement>(null);
+  const requiredWidthRef = useRef(0);
+  const barChromeRef = useRef(0); // bar padding + border (the non-content width)
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
@@ -45,6 +61,69 @@ export default function Navbar() {
     return () => {
       window.removeEventListener("scroll", onScroll);
       if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  // Decide the layout from the VIEWPORT width (not the current bar width) so the
+  // margin/size changes we make below can't feed back and cause oscillation:
+  //  - phone, or can't fit even at mx-4  -> hamburger (compact)
+  //  - fits at mx-4 but not at the morph margins -> keep bar wide (mx-4)
+  //  - otherwise -> full nav + the normal scroll morph
+  useIsomorphicLayoutEffect(() => {
+    const bar = barRef.current;
+    if (!bar) return;
+
+    // Scrolled horizontal margin (px per side) — mirrors the header's
+    // `mx-4 md:mx-32 lg:mx-64` classes (Tailwind md=768, lg=1024).
+    const morphMargin = (vw: number) => (vw >= 1024 ? 256 : vw >= 768 ? 128 : 16);
+
+    const measure = () => {
+      const nav = fullNavRef.current;
+      const logo = logoRef.current;
+      const header = headerRef.current;
+      // Only (re)measure while the full nav is laid out; once collapsed it's
+      // display:none (offsetWidth 0), so we reuse the last measured values.
+      if (nav && logo && header && nav.offsetWidth > 0) {
+        // logo + links/CTA + the 12px row gap (+4px so we switch just *before*
+        // an actual overlap, never while there's still room to fit everything).
+        requiredWidthRef.current = logo.offsetWidth + nav.scrollWidth + 16;
+        // Bar chrome = everything between the header edge and the content row
+        // (px padding, inner content padding, border). Constant across modes.
+        barChromeRef.current = header.offsetWidth - bar.clientWidth;
+      }
+
+      // A phone always gets the hamburger (covers a large phone in landscape
+      // that might otherwise be wide enough to fit).
+      const isPhone =
+        window.matchMedia("(pointer: coarse)").matches &&
+        Math.min(window.screen.width, window.screen.height) <= 480;
+
+      const required = requiredWidthRef.current;
+      if (required > 0) {
+        const vw = window.innerWidth;
+        const chrome = barChromeRef.current;
+        const availAtMx4 = vw - 2 * 16 - chrome; // widest the bar can be
+        const availAtMorph = vw - 2 * morphMargin(vw) - chrome;
+        setCompact(isPhone || required > availAtMx4);
+        setFitsAtMorph(required <= availAtMorph);
+      } else {
+        setCompact(isPhone);
+      }
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(bar);
+
+    let cancelled = false;
+    // Web fonts can change the logo/link widths after first paint.
+    document.fonts?.ready.then(() => {
+      if (!cancelled) measure();
+    }).catch(() => {});
+
+    return () => {
+      cancelled = true;
+      ro.disconnect();
     };
   }, []);
 
@@ -108,85 +187,106 @@ export default function Navbar() {
     [pathname, lenis]
   );
 
+  // Morph the bar in on scroll, but if the full nav wouldn't fit at those large
+  // margins (and we're not already collapsed) keep the bar wide at mx-4 instead.
+  const headerMargins =
+    scrolled && (compact || fitsAtMorph) ? "mx-4 md:mx-32 lg:mx-64" : "mx-4";
+
   return (
     <>
       <header
+        ref={headerRef}
         className={cn(
           "fixed top-4 inset-x-0 z-50",
           "transition-all duration-500 ease-in-out",
           isMounted ? "translate-y-0 opacity-100" : "-translate-y-[150%] opacity-0",
-          scrolled ? "mx-4 md:mx-32 lg:mx-64" : "mx-4 md:mx-4 lg:mx-4",
+          headerMargins,
           "flex justify-center"
         )}
       >
         <GlassSurface
           enabled={scrolled}
+          style={{ "--gs-pad-y": compact ? "0.25rem" : "0.5rem" } as React.CSSProperties}
           className={cn(
-            "relative flex items-center justify-between",
-            "rounded-full px-4 py-1.5 md:px-5 md:py-4 transition-all duration-500 ease-in-out w-full",
+            // Horizontal padding stays constant across modes so the measured
+            // available width never changes with `compact` (no oscillation);
+            // only the vertical padding changes the bar height.
+            "relative w-full rounded-full px-5 transition-all duration-500 ease-in-out",
+            compact ? "py-1.5" : "py-4",
             scrolled
               ? "shadow-2xl shadow-black/50 border border-white/10"
               : "shadow-none border border-transparent bg-transparent"
           )}
         >
-          {/* Left — Logo */}
-          <Link
-            href="/"
-            onClick={(e) => handleNav(e, "/")}
-            className="flex items-center gap-2 z-50 relative group shrink-0 hover:opacity-80 transition-opacity"
-          >
-            <Image
-              src="/strategi.png"
-              alt="Strategi - AI Presence Advisory"
-              width={32}
-              height={32}
-              priority
-              className="rounded-full object-cover h-7 w-7 md:h-8 md:w-8"
-            />
-            <span
-              className={cn(
-                "text-lg md:text-xl font-bold tracking-tighter transition-colors duration-500 ease-in-out",
-                scrolled ? "text-white/90" : "text-[#d4620a]"
-              )}
-            >
-              Strategi
-            </span>
-          </Link>
-
-          {/* Desktop Nav links + CTA */}
-          <nav className="hidden md:flex items-center gap-1 ml-auto" aria-label="Main navigation">
-            <div className="flex items-center rounded-full p-1.5 mr-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={(e) => handleNav(e, link.href)}
-                  className="relative px-4 lg:px-5 py-2 text-sm font-medium text-white/75 hover:text-white transition-colors rounded-full hover:bg-white/10"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-
+          <div ref={barRef} className="flex items-center justify-between w-full gap-3">
+            {/* Left — Logo */}
             <Link
-              href="/#contact"
-              onClick={(e) => handleNav(e, "/#contact")}
-              className="group relative inline-flex items-center justify-center px-6 lg:px-8 py-3 lg:py-3.5 font-bold text-black bg-white hover:bg-[#d4620a] hover:text-white transition-colors duration-300 rounded-full shadow-md shrink-0"
+              ref={logoRef}
+              href="/"
+              onClick={(e) => handleNav(e, "/")}
+              className="flex items-center gap-2 z-50 relative group shrink-0 hover:opacity-80 transition-opacity"
             >
-              <span className="relative flex items-center gap-2 text-sm font-bold tracking-widest uppercase">
-                Book a Call
+              <Image
+                src="/strategi.png"
+                alt="Strategi - AI Presence Advisory"
+                width={32}
+                height={32}
+                priority
+                className={cn("rounded-full object-cover", compact ? "h-7 w-7" : "h-8 w-8")}
+              />
+              <span
+                className={cn(
+                  "font-bold tracking-tighter transition-colors duration-500 ease-in-out",
+                  compact ? "text-lg" : "text-xl",
+                  scrolled ? "text-white/90" : "text-[#d4620a]"
+                )}
+              >
+                Strategi
               </span>
             </Link>
-          </nav>
 
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setOpen(true)}
-            aria-label="Open navigation menu"
-            className="md:hidden relative z-50 p-2 text-white hover:text-[#d4620a] transition-colors cursor-pointer"
-          >
-            <Menu size={24} strokeWidth={1.5} />
-          </button>
+            {/* Full nav (links + CTA) — shown only while it fits the bar */}
+            <nav
+              ref={fullNavRef}
+              aria-label="Main navigation"
+              className={cn("items-center gap-1", compact ? "hidden" : "flex")}
+            >
+              <div className="flex items-center rounded-full p-1.5 mr-4">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={(e) => handleNav(e, link.href)}
+                    className="relative px-4 lg:px-5 py-2 text-sm font-medium text-white/75 hover:text-white transition-colors rounded-full hover:bg-white/10 whitespace-nowrap"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+
+              <Link
+                href="/#contact"
+                onClick={(e) => handleNav(e, "/#contact")}
+                className="group relative inline-flex items-center justify-center px-6 lg:px-8 py-3 lg:py-3.5 font-bold text-black bg-white hover:bg-[#d4620a] hover:text-white transition-colors duration-300 rounded-full shadow-md shrink-0 whitespace-nowrap"
+              >
+                <span className="relative flex items-center gap-2 text-sm font-bold tracking-widest uppercase">
+                  Book a Call
+                </span>
+              </Link>
+            </nav>
+
+            {/* Hamburger — shown only when the full nav no longer fits */}
+            <button
+              onClick={() => setOpen(true)}
+              aria-label="Open navigation menu"
+              className={cn(
+                "relative z-50 p-2 text-white hover:text-[#d4620a] transition-colors cursor-pointer",
+                compact ? "flex" : "hidden"
+              )}
+            >
+              <Menu size={24} strokeWidth={1.5} />
+            </button>
+          </div>
         </GlassSurface>
       </header>
 
