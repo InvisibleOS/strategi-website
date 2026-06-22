@@ -115,7 +115,7 @@ export default function Navbar() {
           "fixed top-4 inset-x-0 z-50",
           "transition-all duration-500 ease-in-out",
           isMounted ? "translate-y-0 opacity-100" : "-translate-y-[150%] opacity-0",
-          scrolled ? "mx-4 md:mx-32 lg:mx-64" : "mx-4 md:mx-8 lg:mx-12",
+          scrolled ? "mx-4 md:mx-32 lg:mx-64" : "mx-4 md:mx-4 lg:mx-4",
           "flex justify-center"
         )}
       >
@@ -123,7 +123,7 @@ export default function Navbar() {
           enabled={scrolled}
           className={cn(
             "relative flex items-center justify-between",
-            "rounded-full px-5 py-3 md:py-4 transition-all duration-500 ease-in-out w-full",
+            "rounded-full px-4 py-1.5 md:px-5 md:py-4 transition-all duration-500 ease-in-out w-full",
             scrolled
               ? "shadow-2xl shadow-black/50 border border-white/10"
               : "shadow-none border border-transparent bg-transparent"
@@ -141,11 +141,11 @@ export default function Navbar() {
               width={32}
               height={32}
               priority
-              className="rounded-full object-cover"
+              className="rounded-full object-cover h-7 w-7 md:h-8 md:w-8"
             />
             <span
               className={cn(
-                "text-xl font-bold tracking-tighter transition-colors duration-500 ease-in-out",
+                "text-lg md:text-xl font-bold tracking-tighter transition-colors duration-500 ease-in-out",
                 scrolled ? "text-white/90" : "text-[#d4620a]"
               )}
             >
@@ -185,7 +185,7 @@ export default function Navbar() {
             aria-label="Open navigation menu"
             className="md:hidden relative z-50 p-2 text-white hover:text-[#d4620a] transition-colors cursor-pointer"
           >
-            <Menu size={28} strokeWidth={1.5} />
+            <Menu size={24} strokeWidth={1.5} />
           </button>
         </GlassSurface>
       </header>

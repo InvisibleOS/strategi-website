@@ -37,6 +37,14 @@
   z-index: 1;
 }
 
+/* Tighter inner padding on phones for a shorter bar (it stacks on top of the
+   navbar's own vertical padding). Desktop keeps the roomier 0.5rem. */
+@media (max-width: 767px) {
+  .glass-surface__content {
+    padding: 0.25rem;
+  }
+}
+
 .glass-surface--svg {
   /* Only hint the compositor while the expensive backdrop filter is actually
      applied (i.e. when scrolled), not permanently on every navbar. */
