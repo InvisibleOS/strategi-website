@@ -189,8 +189,10 @@ const GlassSurface = ({
     borderRadius: `${borderRadius}px`,
     ...(enabled ? {
       '--glass-frost': backgroundOpacity,
-      '--glass-saturation': saturation,
-      '--filter-id': `url(#${filterId})`
+      '--filter-id': `url(#${filterId})`,
+      // Only inject saturate() when it would actually change pixels; a default
+      // saturate(1) is a wasted full-backdrop pass every frame (see the CSS).
+      ...(saturation !== 1 ? { '--glass-saturate': `saturate(${saturation})` } : {})
     } : {})
   } as React.CSSProperties & Record<string, string | number>;
 

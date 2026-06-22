@@ -5,8 +5,10 @@
   justify-content: center;
   overflow: hidden;
   transition: opacity 0.26s ease-out;
-  transform: translateZ(0);
-  -webkit-transform: translate3d(0, 0, 0);
+  /* No layer-promotion hint here: an idle (unscrolled) navbar paints nothing
+     expensive, so it shouldn't permanently own a compositor layer. Promotion
+     is scoped to the active variants below (--svg via will-change, --fallback
+     via its own transform) so it exists only while a backdrop filter runs. */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -31,26 +33,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
+  /* Vertical padding is overridable (via --gs-pad-y) so the navbar can shrink
+     its height in compact mode; horizontal padding stays fixed so the usable
+     content width is unaffected. */
+  padding: var(--gs-pad-y, 0.5rem) 0.5rem;
   border-radius: inherit;
   position: relative;
   z-index: 1;
 }
 
-/* Tighter inner padding on phones for a shorter bar (it stacks on top of the
-   navbar's own vertical padding). Desktop keeps the roomier 0.5rem. */
-@media (max-width: 767px) {
-  .glass-surface__content {
-    padding: 0.25rem;
-  }
-}
-
 .glass-surface--svg {
-  /* Only hint the compositor while the expensive backdrop filter is actually
-     applied (i.e. when scrolled), not permanently on every navbar. */
+  /* The svg variant is only mounted while scrolled, so this is the sole
+     promotion hint and the layer it forces exists only while the costly
+     backdrop filter is actually running — never on the idle navbar. */
   will-change: backdrop-filter;
   background: rgba(255, 255, 255, var(--glass-frost, 0));
-  backdrop-filter: var(--filter-id, url(#glass-filter)) saturate(var(--glass-saturation, 1));
+  /* saturate() is dropped entirely (empty var fallback) unless a non-default
+     saturation is requested. A default saturate(1) is an identity pass over
+     the whole backdrop on every scroll frame — pure cost, zero visual change. */
+  backdrop-filter: var(--filter-id, url(#glass-filter)) var(--glass-saturate, );
   box-shadow:
     0 0 2px 1px light-dark(color-mix(in oklch, black, transparent 85%), color-mix(in oklch, white, transparent 65%)) inset,
     0 0 10px 4px light-dark(color-mix(in oklch, black, transparent 90%), color-mix(in oklch, white, transparent 85%)) inset,
