@@ -56,11 +56,16 @@ const GlassSurface = ({
   const feImageRef = useRef<SVGFEImageElement>(null);
   const displacementMapRef = useRef<SVGFEDisplacementMapElement>(null);
   const gaussianBlurRef = useRef<SVGFEGaussianBlurElement>(null);
+  // Last data-URI pushed to <feImage>, so we can skip redundant (and costly)
+  // re-rasterizations when neither the rounded size nor the params changed.
+  const lastMapUriRef = useRef<string>('');
 
   const generateDisplacementMap = () => {
     const rect = containerRef.current?.getBoundingClientRect();
-    const actualWidth = rect?.width || 400;
-    const actualHeight = rect?.height || 200;
+    // Round to whole pixels: sub-pixel jitter during the width transition would
+    // otherwise churn the map even though the rasterized result is identical.
+    const actualWidth = Math.round(rect?.width || 400);
+    const actualHeight = Math.round(rect?.height || 200);
     const edgeSize = Math.min(actualWidth, actualHeight) * (borderWidth * 0.5);
 
     const svgContent = `
@@ -86,15 +91,19 @@ const GlassSurface = ({
   };
 
   const updateDisplacementMap = () => {
-    if (feImageRef.current) {
-      feImageRef.current.setAttribute('href', generateDisplacementMap());
-    }
+    if (!feImageRef.current) return;
+    const uri = generateDisplacementMap();
+    // Skip the DOM write (and the browser's re-decode/re-raster of the map) when
+    // nothing relevant changed — the common case during scroll and transitions.
+    if (uri === lastMapUriRef.current) return;
+    lastMapUriRef.current = uri;
+    feImageRef.current.setAttribute('href', uri);
   };
 
   // Sync parameters to filter components
   useEffect(() => {
-    if (!enabled) return;
-    
+    if (!enabled || !svgSupported) return;
+
     updateDisplacementMap();
 
     if (displacementMapRef.current) {
@@ -106,6 +115,7 @@ const GlassSurface = ({
     gaussianBlurRef.current?.setAttribute('stdDeviation', displace.toString());
   }, [
     enabled,
+    svgSupported,
     borderRadius,
     borderWidth,
     brightness,
@@ -120,7 +130,7 @@ const GlassSurface = ({
 
   // Consolidated and debounced Resize Observer
   useEffect(() => {
-    if (!enabled || !containerRef.current) return;
+    if (!enabled || !svgSupported || !containerRef.current) return;
 
     let timeoutId: NodeJS.Timeout;
 
@@ -139,7 +149,7 @@ const GlassSurface = ({
       resizeObserver.disconnect();
       clearTimeout(timeoutId);
     };
-  }, [enabled, width, height]);
+  }, [enabled, svgSupported, width, height]);
 
   useEffect(() => {
     setSvgSupported(supportsSVGFilters());
@@ -154,6 +164,15 @@ const GlassSurface = ({
     const isFirefox = /Firefox/.test(navigator.userAgent);
 
     if (isWebkit || isFirefox) {
+      return false;
+    }
+
+    // Per-frame backdrop displacement is the expensive path. Skip it where it
+    // costs the most or shouldn't run, and let CSS fall back to a cheap blur:
+    //  - coarse pointers (phones/tablets) where mobile GPUs choke on it
+    //  - users who asked to reduce motion
+    const mm = window.matchMedia;
+    if (mm && (mm('(pointer: coarse)').matches || mm('(prefers-reduced-motion: reduce)').matches)) {
       return false;
     }
 
@@ -173,7 +192,7 @@ const GlassSurface = ({
       '--glass-saturation': saturation,
       '--filter-id': `url(#${filterId})`
     } : {})
-  } as React.CSSProperties & { [key: string]: any };
+  } as React.CSSProperties & Record<string, string | number>;
 
   const activeClass = enabled
     ? (svgSupported ? 'glass-surface--svg' : 'glass-surface--fallback')
@@ -185,7 +204,7 @@ const GlassSurface = ({
       className={`glass-surface ${activeClass} ${className}`}
       style={containerStyle}
     >
-      {enabled && (
+      {svgSupported && (
         <svg className="glass-surface__filter" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <filter id={filterId} colorInterpolationFilters="sRGB" x="0%" y="0%" width="100%" height="100%">

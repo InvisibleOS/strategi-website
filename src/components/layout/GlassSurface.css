@@ -5,9 +5,14 @@
   justify-content: center;
   overflow: hidden;
   transition: opacity 0.26s ease-out;
-  will-change: backdrop-filter, transform;
   transform: translateZ(0);
   -webkit-transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-surface {
+    transition: none;
+  }
 }
 
 .glass-surface__filter {
@@ -33,6 +38,9 @@
 }
 
 .glass-surface--svg {
+  /* Only hint the compositor while the expensive backdrop filter is actually
+     applied (i.e. when scrolled), not permanently on every navbar. */
+  will-change: backdrop-filter;
   background: rgba(255, 255, 255, var(--glass-frost, 0));
   backdrop-filter: var(--filter-id, url(#glass-filter)) saturate(var(--glass-saturation, 1));
   box-shadow:
