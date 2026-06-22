@@ -140,15 +140,11 @@ function PostCard({
   const img = post.featured_image;
   const imgSrc = img?.url_wide || img?.url_card || null;
 
-  // Geometry: the source image is 2160px tall. The image WINDOW shows the top 1620px (3/4)
-  // — the "stage" inside it is the full image length (4/3 of the window = 133.333%),
-  // top-aligned. With a 1920px-wide image the window is 1920x1620 = 32:27. The card then
-  // EXTENDS below the window (flex-col) to hold the description, date and author.
-  //
-  // Progressive ("gradient") blur over 810/2160 (37.5%) → 1620/2160 (75%): stacked
-  // backdrop-blur layers of increasing radius, maxing at 12px (≈ backdrop-blur-md) by
-  // 1620px and not increasing past it. A matching colour wash runs over the same span:
-  // black/0 at 810px → black/80 at 1620px (and stays black/80 below).
+  // Cover geometry: the picture sits at the TOP of the card at its natural height. Whatever
+  // vertical space is left over below it is filled by a vertically-flipped copy of the same
+  // image — a mirror reflection — which the card's overflow clips once the space runs out.
+  // This self-adjusts to any ratio: a tall image overflows the card (no reflection shows); a
+  // short one (e.g. the new 1080px-tall covers) leaves room, so the mirror fills it.
 
 
   return (
@@ -157,29 +153,39 @@ function PostCard({
         href={`/blogs/${post.slug}`}
         className="group relative block h-full w-full rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4620a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
       >
-        {/* Full image, top-aligned (height = 9/8 of the card width). The card is sized by its
-            content and clips the image at the bottom, so the image fills the whole card and
-            the part below 1620px stays at max (md) blur + black/50 — never solid black. */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 aspect-[8/9]">
+        {/* Cover image + its mirror reflection (see note above). The inner wrapper holds the
+            two stacked images so they hover-zoom together as one; the card's overflow clips the
+            reflection where the free space ends. */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
           {imgSrc ? (
-            <img
-              src={imgSrc}
-              alt={img?.alt || post.title}
-              loading={priority ? "eager" : "lazy"}
-              decoding={priority ? "sync" : "async"}
-              fetchPriority={priority ? "high" : "auto"}
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none"
-            />
+            <div className="transition-transform duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none">
+              {/* The picture: at the top, shown in full at its natural height */}
+              <img
+                src={imgSrc}
+                alt={img?.alt || post.title}
+                loading={priority ? "eager" : "lazy"}
+                decoding={priority ? "sync" : "async"}
+                fetchPriority={priority ? "high" : "auto"}
+                className="block w-full h-auto"
+              />
+              {/* Same image, flipped vertically, directly below — mirrors across the seam and
+                  fills the leftover space (clipped by the card once it runs out) */}
+              <img
+                src={imgSrc}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="block w-full h-auto -scale-y-100"
+              />
+            </div>
           ) : (
             <div className="absolute inset-0 bg-linear-to-br from-[#d4620a]/20 via-[#0a0a0a] to-[#0a0a0a]" />
           )}
 
+          {/* Colour wash: clean over the picture, fading to near-black behind the text below */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0)_30%,rgba(0,0,0,0.6)_52%,rgba(0,0,0,0.9)_72%)]" />
 
-
-          {/* Colour wash: black/0 at 810px (37.5%) → black/80 at 1620px (75%), then constant black/80 */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0)_37.5%,rgba(0,0,0,0.8)_75%)]" />
-
-          {/* Hover: black/10 overlay across the whole image */}
+          {/* Hover: subtle darken across the whole card */}
           <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10 motion-reduce:transition-none" />
         </div>
 
@@ -191,9 +197,9 @@ function PostCard({
           <Heart className="h-5 w-5 text-white" strokeWidth={1.75} />
         </span>
 
-        {/* Content fills from 1080px (50% of the image = 56.25% of the card) to the bottom.
-            justify-end keeps the title + description close to the button (any extra space goes
-            above the title); the button is fully round and pinned to the bottom. */}
+        {/* Content occupies the lower portion of the card (from 56.25% down). justify-end keeps
+            the title + description close to the button (any extra space goes above the title);
+            the button is fully round and pinned to the bottom. */}
         <div className="absolute inset-x-0 top-[56.25%] bottom-0 flex flex-col justify-end px-7 pb-7">
           <h2 className="text-xl font-bold leading-tight tracking-tight text-white line-clamp-2 md:text-2xl">
             {post.title}
