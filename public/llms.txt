@@ -8,7 +8,7 @@
 ## About
 
 - [Homepage](https://strategi.is): AI Presence advisory for established businesses
-- [About Strategi](https://strategi.is/about): The company, the thesis, and the founders — the AI visibility authority
+- [About Strategi](https://strategi.is/about): The company and the thesis — the AI visibility authority
 - [How It Works](https://strategi.is/#how-it-works): The six-phase Strategi Methodology
 - [Why Strategi](https://strategi.is/#why-strategi): How we think differently about AI discovery
 - [The Measurement Layer](https://strategi.is/#intelligence): The public instruments Strategi builds to measure AI visibility
@@ -38,13 +38,6 @@ Strategi runs the "Who Owns AI?" index and a dedicated GEO landing page for each
 - [GEO for Education](https://strategi.is/who-owns-ai/education)
 - [GEO for B2B SaaS](https://strategi.is/who-owns-ai/b2b-saas)
 - [GEO for Wealth Management](https://strategi.is/who-owns-ai/wealth-management)
-
-## Founders
-
-Strategi was founded in 2026 by Tanissh and Adnan, two co-founders working at the intersection of brand strategy, information architecture, and machine comprehension. See https://strategi.is/about#founders.
-
-- Tanissh, Co-Founder — LinkedIn https://www.linkedin.com/in/tanissh-amit , Instagram https://www.instagram.com/tanisshamit
-- Adnan, Co-Founder — LinkedIn https://www.linkedin.com/in/adnan30baig , Instagram https://www.instagram.com/adnan30baig
 
 ## Manifesto
 

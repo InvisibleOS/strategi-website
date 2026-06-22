@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_URL, FOUNDERS } from "@/lib/site";
+import { SITE_URL } from "@/lib/site";
 import { JsonLd } from "@/components/geo/Editorial";
 import AboutContent, { type AboutFaqItem } from "./AboutContent";
 
@@ -9,10 +9,9 @@ const OG_IMAGE = `${SITE_URL}/strategi.png`;
 export const metadata: Metadata = {
   title: "About Strategi — The AI Visibility Authority",
   description:
-    "Strategi is the advisory and measurement layer for AI discovery. Meet the founders, read the thesis, and see how we make the right businesses get recommended by ChatGPT, Gemini, Perplexity, and Claude.",
+    "Strategi is the advisory and measurement layer for AI discovery. Read the thesis and see how we make the right businesses get recommended by ChatGPT, Gemini, Perplexity, and Claude.",
   keywords: [
     "About Strategi",
-    "Strategi founders",
     "AI visibility authority",
     "AI Presence advisory",
     "GEO agency",
@@ -24,13 +23,13 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    type: "profile",
+    type: "website",
     locale: "en_US",
     url: PAGE_URL,
     siteName: "Strategi",
     title: "About Strategi — The AI Visibility Authority",
     description:
-      "The advisory and measurement layer for AI discovery. Meet the founders and read the thesis behind Strategi.",
+      "The advisory and measurement layer for AI discovery. Read the thesis behind Strategi.",
     images: [{ url: OG_IMAGE, width: 1200, height: 1200, alt: "Strategi" }],
   },
   twitter: {
@@ -39,7 +38,7 @@ export const metadata: Metadata = {
     creator: "@HelloStrategi",
     title: "About Strategi — The AI Visibility Authority",
     description:
-      "The advisory and measurement layer for AI discovery. Meet the founders and read the thesis behind Strategi.",
+      "The advisory and measurement layer for AI discovery. Read the thesis behind Strategi.",
     images: [OG_IMAGE],
   },
 };
@@ -52,10 +51,6 @@ const ABOUT_FAQ: AboutFaqItem[] = [
   {
     q: "Is Strategi an SEO or GEO agency?",
     a: "Neither, in the conventional sense. Most GEO agencies are former SEO firms selling the same keyword playbook under a new acronym. Strategi is a strategic advisory built natively around AI Presence, and increasingly the measurement layer for the whole category. We do not chase rankings. We earn recommendations and track them.",
-  },
-  {
-    q: "Who founded Strategi?",
-    a: "Strategi was founded in 2026 by Tanissh and Adnan, two co-founders who build at the intersection of brand strategy, information architecture, and machine comprehension. They lead the methodology, the positioning work, and the instruments Strategi builds to measure AI visibility.",
   },
   {
     q: "Why does Strategi build public tools like the leaderboard and ROI calculator?",
@@ -82,20 +77,6 @@ function Schemas() {
     ],
   };
 
-  const persons = FOUNDERS.map((f) => {
-    const sameAs = [f.linkedin, f.instagram, f.x].filter(Boolean);
-    return {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "@id": `${SITE_URL}/#${f.id}`,
-      name: f.name,
-      jobTitle: f.role,
-      image: `${SITE_URL}${f.photo}`,
-      worksFor: { "@id": `${SITE_URL}/#organization` },
-      ...(sameAs.length ? { sameAs } : {}),
-    };
-  });
-
   const aboutPage = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
@@ -103,7 +84,7 @@ function Schemas() {
     url: PAGE_URL,
     name: "About Strategi — The AI Visibility Authority",
     description:
-      "Strategi is the advisory and measurement layer for AI discovery. Meet the founders and read the thesis.",
+      "Strategi is the advisory and measurement layer for AI discovery. Read the thesis.",
     isPartOf: { "@id": `${SITE_URL}/#website` },
     about: { "@id": `${SITE_URL}/#organization` },
     mainEntity: { "@id": `${SITE_URL}/#organization` },
@@ -123,7 +104,7 @@ function Schemas() {
     })),
   };
 
-  return <JsonLd schema={[breadcrumb, aboutPage, ...persons, faq]} />;
+  return <JsonLd schema={[breadcrumb, aboutPage, faq]} />;
 }
 
 export default function AboutPage() {

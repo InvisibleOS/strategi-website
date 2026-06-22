@@ -188,8 +188,18 @@ export default function Footer() {
             >
               Sitemap
             </a>
-            <span className="text-white/20 cursor-default">Terms</span>
-            <span className="text-white/20 cursor-default">Privacy</span>
+            <a
+              href="/terms"
+              className="text-white/40 hover:text-white transition-colors"
+            >
+              Terms
+            </a>
+            <a
+              href="/privacy"
+              className="text-white/40 hover:text-white transition-colors"
+            >
+              Privacy
+            </a>
           </div>
           <span>&copy; 2026 Strategi. All rights reserved.</span>
         </motion.div>
