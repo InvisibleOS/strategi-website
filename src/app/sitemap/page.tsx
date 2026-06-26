@@ -173,6 +173,13 @@ export default async function SitemapPage() {
       })),
     },
     {
+      label: "Legal",
+      items: [
+        { href: "/privacy", label: "Privacy Policy", date: "Always current" },
+        { href: "/terms", label: "Terms of Service", date: "Always current" },
+      ],
+    },
+    {
       label: "Machine-readable",
       items: [
         { href: "/sitemap.xml", label: "XML sitemap", date: "Auto-generated" },

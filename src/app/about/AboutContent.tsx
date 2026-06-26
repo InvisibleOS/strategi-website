@@ -1,10 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-import { FOUNDERS, INTELLIGENCE, MANIFESTO, CONTACT_EMAIL } from "@/lib/site";
+import { INTELLIGENCE, MANIFESTO, CONTACT_EMAIL } from "@/lib/site";
 import { LinkCard, InfoCard } from "@/components/geo/Editorial";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
@@ -126,10 +125,10 @@ export default function AboutContent({ faq }: { faq: AboutFaqItem[] }) {
                 Start a diagnostic &rarr;
               </Link>
               <a
-                href="#founders"
+                href="#thesis"
                 className="border border-white/20 text-white text-sm font-medium px-7 py-4 hover:border-white/50 transition-colors text-center"
               >
-                Meet the founders
+                Read the thesis
               </a>
             </div>
           </motion.div>
@@ -221,84 +220,6 @@ export default function AboutContent({ faq }: { faq: AboutFaqItem[] }) {
             <p className="mt-12 text-lg md:text-2xl text-white/50 font-light italic max-w-3xl leading-relaxed">
               Visibility is no longer about being found. It is about being
               chosen.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ════════════ FOUNDERS ════════════ */}
-      <section
-        id="founders"
-        aria-labelledby="founders-h"
-        className="bg-white/[0.01] border-y border-white/5 py-24 md:py-40 scroll-mt-24"
-      >
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-          <SectionHead eyebrow="The founders" id="founders-h" title="Meet the founders." />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-            {FOUNDERS.map((f, i) => (
-              <Reveal key={f.id} delay={i * 0.12}>
-                <article className="group">
-                  <div className="relative overflow-hidden border border-white/10 bg-[#0a0a0a] aspect-[4/5]">
-                    <Image
-                      src={f.photo}
-                      alt={f.alt}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 680px"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent"
-                    />
-                    <div className="absolute left-0 bottom-0 p-6 md:p-8">
-                      <h3 className="text-3xl md:text-4xl font-bold tracking-tighter text-white">
-                        {f.name}
-                      </h3>
-                      <p className="mt-1 text-[10px] font-mono uppercase tracking-[0.2em] text-[#d4620a]">
-                        {f.role}
-                      </p>
-                    </div>
-                    <div className="absolute top-0 left-0 w-full h-[2px] bg-[#d4620a] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
-                  </div>
-                  <div className="mt-5 flex gap-5 text-[10px] font-mono uppercase tracking-widest">
-                    {f.linkedin && (
-                      <a
-                        href={f.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white/55 hover:text-[#d4620a] transition-colors"
-                      >
-                        LinkedIn &rarr;
-                      </a>
-                    )}
-                    {f.instagram && (
-                      <a
-                        href={f.instagram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white/55 hover:text-[#d4620a] transition-colors"
-                      >
-                        Instagram &rarr;
-                      </a>
-                    )}
-                    {f.x && (
-                      <a
-                        href={f.x}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white/55 hover:text-[#d4620a] transition-colors"
-                      >
-                        X &rarr;
-                      </a>
-                    )}
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal>
-            <p className="mt-12 text-sm text-white/40 font-mono uppercase tracking-widest">
-              Founded 2026 &middot; Building the measurement layer for AI discovery
             </p>
           </Reveal>
         </div>

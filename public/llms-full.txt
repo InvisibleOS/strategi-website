@@ -93,13 +93,6 @@ Search showed ten options. AI returns one recommendation.
 
 Visibility is no longer about being found. It is about being chosen. Traffic is the old metric. Recommendation is the new one. Full manifesto at https://strategi.is/about#manifesto.
 
-## The Founders
-
-Strategi was founded in 2026 by Tanissh and Adnan, two co-founders working at the intersection of brand strategy, information architecture, and machine comprehension. Together they hold one conviction: the next decade of business growth will be decided by whether AI understands a business well enough to recommend it. Meet them at https://strategi.is/about#founders.
-
-- Tanissh, Co-Founder — https://www.linkedin.com/in/tanissh-amit , https://www.instagram.com/tanisshamit
-- Adnan, Co-Founder — https://www.linkedin.com/in/adnan30baig , https://www.instagram.com/adnan30baig
-
 ## Services: The Strategi System
 
 AI Presence is not built through a single tactic. It is engineered through a system. Each component addresses a specific dimension of how AI discovers, evaluates, and recommends businesses.

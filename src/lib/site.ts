@@ -13,46 +13,6 @@ export const SOCIALS = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Founders
-//   founder-a → Tanissh (brown tee, podcast microphone)
-//   founder-b → Adnan (navy polo, glasses)
-// Everything that renders founders (About page, Organization JSON-LD, llms.txt)
-// reads from this single array.
-// ─────────────────────────────────────────────────────────────────────────────
-
-export interface Founder {
-  id: string;
-  name: string;
-  role: string;
-  photo: string;
-  alt: string;
-  linkedin?: string;
-  instagram?: string;
-  x?: string;
-}
-
-export const FOUNDERS: Founder[] = [
-  {
-    id: "founder-a",
-    name: "Tanissh",
-    role: "Co-Founder",
-    photo: "/founders/founder-a.jpg",
-    alt: "Tanissh, Co-Founder of Strategi",
-    linkedin: "https://www.linkedin.com/in/tanissh-amit",
-    instagram: "https://www.instagram.com/tanisshamit",
-  },
-  {
-    id: "founder-b",
-    name: "Adnan",
-    role: "Co-Founder",
-    photo: "/founders/founder-b.jpg",
-    alt: "Adnan, Co-Founder of Strategi",
-    linkedin: "https://www.linkedin.com/in/adnan30baig",
-    instagram: "https://www.instagram.com/adnan30baig",
-  },
-];
-
-// ─────────────────────────────────────────────────────────────────────────────
 // The measurement layer — Strategi's category-defining surface area.
 // "live" products have their own routes; "building" products capture interest.
 // ─────────────────────────────────────────────────────────────────────────────
