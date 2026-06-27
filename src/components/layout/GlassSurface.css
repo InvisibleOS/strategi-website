@@ -93,6 +93,15 @@
   }
 }
 
+/* Last-ditch fallback: browsers with no backdrop-filter at all (very old, or
+   with it disabled) can't blur the backdrop, so lean on a more opaque solid fill
+   to keep the bar legible instead of a see-through panel. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-surface--fallback {
+    background: rgba(20, 20, 20, 0.85);
+  }
+}
+
 .glass-surface:focus-visible {
   outline: 2px solid light-dark(#007aff, #0a84ff);
   outline-offset: 2px;

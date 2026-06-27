@@ -130,6 +130,26 @@ function BlogJsonLd({
   );
 }
 
+// Progressive "liquid glass" blur running down the cover. Built from stacked,
+// masked copies of the image (filter: blur) — not backdrop-filter — so it renders
+// on every browser and phone and stays cheap while scrolling (each blurred copy
+// is rasterised once, then just composited; never re-blurred per frame).
+//
+// Coordinates are percentages of the inner wrapper, whose height is exactly twice
+// the cover's natural height (the picture plus its mirror): 37.5% is three-quarters
+// down the picture (where the blur begins) and 50% is the seam where the mirror
+// starts (where the blur reaches full strength). Below the seam the strongest layer
+// stays fully opaque, so the blur holds steady. Because both images scale together,
+// these fractions hold at any screen size. Each layer fades in (transparent → black)
+// across [from%, 50%] with an increasing radius, so the layers crossfade into a
+// smooth ramp; the strongest one (last, painted on top) wins below the seam.
+const COVER_BLUR_LAYERS = [
+  { blur: 4, from: 37.5 },
+  { blur: 9, from: 40.6 },
+  { blur: 16, from: 43.8 },
+  { blur: 26, from: 46.9 },
+];
+
 function PostCard({
   post,
   priority,
@@ -158,7 +178,7 @@ function PostCard({
             reflection where the free space ends. */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
           {imgSrc ? (
-            <div className="transition-transform duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none">
+            <div className="relative transition-transform duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none">
               {/* The picture: at the top, shown in full at its natural height */}
               <img
                 src={imgSrc}
@@ -177,6 +197,35 @@ function PostCard({
                 decoding="async"
                 className="block w-full h-auto -scale-y-100"
               />
+              {/* Gradual blur down the cover — masked, stacked copies of the same
+                  picture+mirror (see COVER_BLUR_LAYERS). inset-0 spans the full
+                  two-image wrapper, so the % stops track the picture, not the card. */}
+              {COVER_BLUR_LAYERS.map((layer) => (
+                <div
+                  key={layer.blur}
+                  className="absolute inset-0"
+                  style={{
+                    filter: `blur(${layer.blur}px)`,
+                    WebkitMaskImage: `linear-gradient(to bottom, transparent ${layer.from}%, #000 50%)`,
+                    maskImage: `linear-gradient(to bottom, transparent ${layer.from}%, #000 50%)`,
+                  }}
+                >
+                  <img
+                    src={imgSrc}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="block w-full h-auto"
+                  />
+                  <img
+                    src={imgSrc}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="block w-full h-auto -scale-y-100"
+                  />
+                </div>
+              ))}
             </div>
           ) : (
             <div className="absolute inset-0 bg-linear-to-br from-[#d4620a]/20 via-[#0a0a0a] to-[#0a0a0a]" />

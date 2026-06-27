@@ -160,6 +160,11 @@ const GlassSurface = ({
       return false;
     }
 
+    // SVG-filter-in-backdrop-filter (the displacement "liquid glass") is
+    // effectively Chromium-only: Safari/iOS and Firefox parse the value but
+    // don't render it, so flag them by UA and let CSS fall back to a plain
+    // glass blur. (iOS Chrome/Firefox are WebKit under the hood and report no
+    // "Chrome" token, so isWebkit catches them too.)
     const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
     const isFirefox = /Firefox/.test(navigator.userAgent);
 
@@ -167,12 +172,12 @@ const GlassSurface = ({
       return false;
     }
 
-    // Per-frame backdrop displacement is the expensive path. Skip it where it
-    // costs the most or shouldn't run, and let CSS fall back to a cheap blur:
-    //  - coarse pointers (phones/tablets) where mobile GPUs choke on it
-    //  - users who asked to reduce motion
+    // Honour reduced-motion — the per-frame backdrop displacement reads as
+    // motion. We deliberately no longer bail on coarse pointers: capable mobile
+    // Chromium gets the real effect too, and everything that can't (Safari/iOS,
+    // Firefox) already fell back above to the cheap blur.
     const mm = window.matchMedia;
-    if (mm && (mm('(pointer: coarse)').matches || mm('(prefers-reduced-motion: reduce)').matches)) {
+    if (mm && mm('(prefers-reduced-motion: reduce)').matches) {
       return false;
     }
 
